@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0222904B14C89818003643D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222904A14C89818003643D5 /* UIKit.framework */; };
+		0222904D14C89818003643D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222904C14C89818003643D5 /* Foundation.framework */; };
+		0222904F14C89818003643D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222904E14C89818003643D5 /* CoreGraphics.framework */; };
+		0222905514C89818003643D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0222905314C89818003643D5 /* InfoPlist.strings */; };
+		0222905714C89818003643D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222905614C89818003643D5 /* main.m */; };
+		0222905B14C89818003643D5 /* FCRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222905A14C89818003643D5 /* FCRAppDelegate.m */; };
+		0222905E14C89818003643D5 /* FCRRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222905D14C89818003643D5 /* FCRRootViewController.m */; };
+		0222906114C89818003643D5 /* FCRDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222906014C89818003643D5 /* FCRDataViewController.m */; };
+		0222906414C89818003643D5 /* FCRModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222906314C89818003643D5 /* FCRModelController.m */; };
+		0222906714C89818003643D5 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0222906514C89818003643D5 /* MainStoryboard_iPhone.storyboard */; };
+		0222906A14C89818003643D5 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0222906814C89818003643D5 /* MainStoryboard_iPad.storyboard */; };
+		0222907214C89818003643D5 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222907114C89818003643D5 /* SenTestingKit.framework */; };
+		0222907314C89818003643D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222904A14C89818003643D5 /* UIKit.framework */; };
+		0222907414C89818003643D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222904C14C89818003643D5 /* Foundation.framework */; };
+		0222907C14C89818003643D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0222907A14C89818003643D5 /* InfoPlist.strings */; };
+		0222907F14C89819003643D5 /* FullCircleReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222907E14C89819003643D5 /* FullCircleReaderTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0222907514C89818003643D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0222903D14C89817003643D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0222904514C89817003643D5;
+			remoteInfo = FullCircleReader;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0222904614C89817003643D5 /* FullCircleReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullCircleReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0222904A14C89818003643D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0222904C14C89818003643D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0222904E14C89818003643D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0222905214C89818003643D5 /* FullCircleReader-Info.plist */ = {isa = PBXFileReference; path = "FullCircleReader-Info.plist"; sourceTree = "<group>"; };
+		0222905414C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0222905614C89818003643D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0222905814C89818003643D5 /* FullCircleReader-Prefix.pch */ = {isa = PBXFileReference; path = "FullCircleReader-Prefix.pch"; sourceTree = "<group>"; };
+		0222905914C89818003643D5 /* FCRAppDelegate.h */ = {isa = PBXFileReference; path = FCRAppDelegate.h; sourceTree = "<group>"; };
+		0222905A14C89818003643D5 /* FCRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRAppDelegate.m; sourceTree = "<group>"; };
+		0222905C14C89818003643D5 /* FCRRootViewController.h */ = {isa = PBXFileReference; path = FCRRootViewController.h; sourceTree = "<group>"; };
+		0222905D14C89818003643D5 /* FCRRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRRootViewController.m; sourceTree = "<group>"; };
+		0222905F14C89818003643D5 /* FCRDataViewController.h */ = {isa = PBXFileReference; path = FCRDataViewController.h; sourceTree = "<group>"; };
+		0222906014C89818003643D5 /* FCRDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRDataViewController.m; sourceTree = "<group>"; };
+		0222906214C89818003643D5 /* FCRModelController.h */ = {isa = PBXFileReference; path = FCRModelController.h; sourceTree = "<group>"; };
+		0222906314C89818003643D5 /* FCRModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRModelController.m; sourceTree = "<group>"; };
+		0222906614C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		0222906914C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		0222907014C89818003643D5 /* FullCircleReaderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FullCircleReaderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0222907114C89818003643D5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0222907914C89818003643D5 /* FullCircleReaderTests-Info.plist */ = {isa = PBXFileReference; path = "FullCircleReaderTests-Info.plist"; sourceTree = "<group>"; };
+		0222907B14C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0222907D14C89818003643D5 /* FullCircleReaderTests.h */ = {isa = PBXFileReference; path = FullCircleReaderTests.h; sourceTree = "<group>"; };
+		0222907E14C89819003643D5 /* FullCircleReaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullCircleReaderTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0222904314C89817003643D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0222904B14C89818003643D5 /* UIKit.framework in Frameworks */,
+				0222904D14C89818003643D5 /* Foundation.framework in Frameworks */,
+				0222904F14C89818003643D5 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0222906C14C89818003643D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0222907214C89818003643D5 /* SenTestingKit.framework in Frameworks */,
+				0222907314C89818003643D5 /* UIKit.framework in Frameworks */,
+				0222907414C89818003643D5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0222903B14C89817003643D5 = {
+			isa = PBXGroup;
+			children = (
+				0222905014C89818003643D5 /* FullCircleReader */,
+				0222907714C89818003643D5 /* FullCircleReaderTests */,
+				0222904914C89817003643D5 /* Frameworks */,
+				0222904714C89817003643D5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0222904714C89817003643D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0222904614C89817003643D5 /* FullCircleReader.app */,
+				0222907014C89818003643D5 /* FullCircleReaderTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0222904914C89817003643D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0222904A14C89818003643D5 /* UIKit.framework */,
+				0222904C14C89818003643D5 /* Foundation.framework */,
+				0222904E14C89818003643D5 /* CoreGraphics.framework */,
+				0222907114C89818003643D5 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0222905014C89818003643D5 /* FullCircleReader */ = {
+			isa = PBXGroup;
+			children = (
+				0222905914C89818003643D5 /* FCRAppDelegate.h */,
+				0222905A14C89818003643D5 /* FCRAppDelegate.m */,
+				0222905C14C89818003643D5 /* FCRRootViewController.h */,
+				0222905D14C89818003643D5 /* FCRRootViewController.m */,
+				0222905F14C89818003643D5 /* FCRDataViewController.h */,
+				0222906014C89818003643D5 /* FCRDataViewController.m */,
+				0222906214C89818003643D5 /* FCRModelController.h */,
+				0222906314C89818003643D5 /* FCRModelController.m */,
+				0222906514C89818003643D5 /* MainStoryboard_iPhone.storyboard */,
+				0222906814C89818003643D5 /* MainStoryboard_iPad.storyboard */,
+				0222905114C89818003643D5 /* Supporting Files */,
+			);
+			path = FullCircleReader;
+			sourceTree = "<group>";
+		};
+		0222905114C89818003643D5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0222905214C89818003643D5 /* FullCircleReader-Info.plist */,
+				0222905314C89818003643D5 /* InfoPlist.strings */,
+				0222905614C89818003643D5 /* main.m */,
+				0222905814C89818003643D5 /* FullCircleReader-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0222907714C89818003643D5 /* FullCircleReaderTests */ = {
+			isa = PBXGroup;
+			children = (
+				0222907D14C89818003643D5 /* FullCircleReaderTests.h */,
+				0222907E14C89819003643D5 /* FullCircleReaderTests.m */,
+				0222907814C89818003643D5 /* Supporting Files */,
+			);
+			path = FullCircleReaderTests;
+			sourceTree = "<group>";
+		};
+		0222907814C89818003643D5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0222907914C89818003643D5 /* FullCircleReaderTests-Info.plist */,
+				0222907A14C89818003643D5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0222904514C89817003643D5 /* FullCircleReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0222908214C89819003643D5 /* Build configuration list for PBXNativeTarget "FullCircleReader" */;
+			buildPhases = (
+				0222904214C89817003643D5 /* Sources */,
+				0222904314C89817003643D5 /* Frameworks */,
+				0222904414C89817003643D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FullCircleReader;
+			productName = FullCircleReader;
+			productReference = 0222904614C89817003643D5 /* FullCircleReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0222906F14C89818003643D5 /* FullCircleReaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0222908514C89819003643D5 /* Build configuration list for PBXNativeTarget "FullCircleReaderTests" */;
+			buildPhases = (
+				0222906B14C89818003643D5 /* Sources */,
+				0222906C14C89818003643D5 /* Frameworks */,
+				0222906D14C89818003643D5 /* Resources */,
+				0222906E14C89818003643D5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0222907614C89818003643D5 /* PBXTargetDependency */,
+			);
+			name = FullCircleReaderTests;
+			productName = FullCircleReaderTests;
+			productReference = 0222907014C89818003643D5 /* FullCircleReaderTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0222903D14C89817003643D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Servo Labs, LLC";
+			};
+			buildConfigurationList = 0222904014C89817003643D5 /* Build configuration list for PBXProject "FullCircleReader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0222903B14C89817003643D5;
+			productRefGroup = 0222904714C89817003643D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0222904514C89817003643D5 /* FullCircleReader */,
+				0222906F14C89818003643D5 /* FullCircleReaderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0222904414C89817003643D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0222905514C89818003643D5 /* InfoPlist.strings in Resources */,
+				0222906714C89818003643D5 /* MainStoryboard_iPhone.storyboard in Resources */,
+				0222906A14C89818003643D5 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0222906D14C89818003643D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0222907C14C89818003643D5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0222906E14C89818003643D5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0222904214C89817003643D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0222905714C89818003643D5 /* main.m in Sources */,
+				0222905B14C89818003643D5 /* FCRAppDelegate.m in Sources */,
+				0222905E14C89818003643D5 /* FCRRootViewController.m in Sources */,
+				0222906114C89818003643D5 /* FCRDataViewController.m in Sources */,
+				0222906414C89818003643D5 /* FCRModelController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0222906B14C89818003643D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0222907F14C89819003643D5 /* FullCircleReaderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0222907614C89818003643D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0222904514C89817003643D5 /* FullCircleReader */;
+			targetProxy = 0222907514C89818003643D5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0222905314C89818003643D5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0222905414C89818003643D5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0222906514C89818003643D5 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0222906614C89818003643D5 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		0222906814C89818003643D5 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0222906914C89818003643D5 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		0222907A14C89818003643D5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0222907B14C89818003643D5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0222908014C89819003643D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0222908114C89819003643D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0222908314C89819003643D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
+				INFOPLIST_FILE = "FullCircleReader/FullCircleReader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0222908414C89819003643D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
+				INFOPLIST_FILE = "FullCircleReader/FullCircleReader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0222908614C89819003643D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FullCircleReader.app/FullCircleReader";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
+				INFOPLIST_FILE = "FullCircleReaderTests/FullCircleReaderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0222908714C89819003643D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FullCircleReader.app/FullCircleReader";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
+				INFOPLIST_FILE = "FullCircleReaderTests/FullCircleReaderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0222904014C89817003643D5 /* Build configuration list for PBXProject "FullCircleReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0222908014C89819003643D5 /* Debug */,
+				0222908114C89819003643D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0222908214C89819003643D5 /* Build configuration list for PBXNativeTarget "FullCircleReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0222908314C89819003643D5 /* Debug */,
+				0222908414C89819003643D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0222908514C89819003643D5 /* Build configuration list for PBXNativeTarget "FullCircleReaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0222908614C89819003643D5 /* Debug */,
+				0222908714C89819003643D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0222903D14C89817003643D5 /* Project object */;
+}

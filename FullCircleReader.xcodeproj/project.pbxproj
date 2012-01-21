@@ -40,25 +40,25 @@
 		0222904A14C89818003643D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0222904C14C89818003643D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0222904E14C89818003643D5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0222905214C89818003643D5 /* FullCircleReader-Info.plist */ = {isa = PBXFileReference; path = "FullCircleReader-Info.plist"; sourceTree = "<group>"; };
+		0222905214C89818003643D5 /* FullCircleReader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FullCircleReader-Info.plist"; sourceTree = "<group>"; };
 		0222905414C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0222905614C89818003643D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0222905814C89818003643D5 /* FullCircleReader-Prefix.pch */ = {isa = PBXFileReference; path = "FullCircleReader-Prefix.pch"; sourceTree = "<group>"; };
-		0222905914C89818003643D5 /* FCRAppDelegate.h */ = {isa = PBXFileReference; path = FCRAppDelegate.h; sourceTree = "<group>"; };
+		0222905814C89818003643D5 /* FullCircleReader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FullCircleReader-Prefix.pch"; sourceTree = "<group>"; };
+		0222905914C89818003643D5 /* FCRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCRAppDelegate.h; sourceTree = "<group>"; };
 		0222905A14C89818003643D5 /* FCRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRAppDelegate.m; sourceTree = "<group>"; };
-		0222905C14C89818003643D5 /* FCRRootViewController.h */ = {isa = PBXFileReference; path = FCRRootViewController.h; sourceTree = "<group>"; };
+		0222905C14C89818003643D5 /* FCRRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCRRootViewController.h; sourceTree = "<group>"; };
 		0222905D14C89818003643D5 /* FCRRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRRootViewController.m; sourceTree = "<group>"; };
-		0222905F14C89818003643D5 /* FCRDataViewController.h */ = {isa = PBXFileReference; path = FCRDataViewController.h; sourceTree = "<group>"; };
+		0222905F14C89818003643D5 /* FCRDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCRDataViewController.h; sourceTree = "<group>"; };
 		0222906014C89818003643D5 /* FCRDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRDataViewController.m; sourceTree = "<group>"; };
-		0222906214C89818003643D5 /* FCRModelController.h */ = {isa = PBXFileReference; path = FCRModelController.h; sourceTree = "<group>"; };
+		0222906214C89818003643D5 /* FCRModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCRModelController.h; sourceTree = "<group>"; };
 		0222906314C89818003643D5 /* FCRModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCRModelController.m; sourceTree = "<group>"; };
 		0222906614C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		0222906914C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		0222907014C89818003643D5 /* FullCircleReaderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FullCircleReaderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0222907114C89818003643D5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0222907914C89818003643D5 /* FullCircleReaderTests-Info.plist */ = {isa = PBXFileReference; path = "FullCircleReaderTests-Info.plist"; sourceTree = "<group>"; };
+		0222907914C89818003643D5 /* FullCircleReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FullCircleReaderTests-Info.plist"; sourceTree = "<group>"; };
 		0222907B14C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0222907D14C89818003643D5 /* FullCircleReaderTests.h */ = {isa = PBXFileReference; path = FullCircleReaderTests.h; sourceTree = "<group>"; };
+		0222907D14C89818003643D5 /* FullCircleReaderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullCircleReaderTests.h; sourceTree = "<group>"; };
 		0222907E14C89819003643D5 /* FullCircleReaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullCircleReaderTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

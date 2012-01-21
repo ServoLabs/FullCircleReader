@@ -23,6 +23,10 @@
 		0222907414C89818003643D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0222904C14C89818003643D5 /* Foundation.framework */; };
 		0222907C14C89818003643D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0222907A14C89818003643D5 /* InfoPlist.strings */; };
 		0222907F14C89819003643D5 /* FullCircleReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222907E14C89819003643D5 /* FullCircleReaderTests.m */; };
+		0293086114CA796E00422C08 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293085E14CA796E00422C08 /* circle.png */; };
+		0293086214CA796E00422C08 /* fcnewlogo.png.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */; };
+		0293086314CA796E00422C08 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293086014CA796E00422C08 /* Icon72.png */; };
+		0293086514CA7C1400422C08 /* NewsstandCoverArt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,10 @@
 		0222907B14C89818003643D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0222907D14C89818003643D5 /* FullCircleReaderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullCircleReaderTests.h; sourceTree = "<group>"; };
 		0222907E14C89819003643D5 /* FullCircleReaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullCircleReaderTests.m; sourceTree = "<group>"; };
+		0293085E14CA796E00422C08 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+		0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fcnewlogo.png.jpg; sourceTree = "<group>"; };
+		0293086014CA796E00422C08 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NewsstandCoverArt.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,7 @@
 		0222905014C89818003643D5 /* FullCircleReader */ = {
 			isa = PBXGroup;
 			children = (
+				0293085D14CA796E00422C08 /* Images */,
 				0222905914C89818003643D5 /* FCRAppDelegate.h */,
 				0222905A14C89818003643D5 /* FCRAppDelegate.m */,
 				0222905C14C89818003643D5 /* FCRRootViewController.h */,
@@ -162,6 +171,17 @@
 				0222907A14C89818003643D5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0293085D14CA796E00422C08 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */,
+				0293085E14CA796E00422C08 /* circle.png */,
+				0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */,
+				0293086014CA796E00422C08 /* Icon72.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +258,10 @@
 				0222905514C89818003643D5 /* InfoPlist.strings in Resources */,
 				0222906714C89818003643D5 /* MainStoryboard_iPhone.storyboard in Resources */,
 				0222906A14C89818003643D5 /* MainStoryboard_iPad.storyboard in Resources */,
+				0293086114CA796E00422C08 /* circle.png in Resources */,
+				0293086214CA796E00422C08 /* fcnewlogo.png.jpg in Resources */,
+				0293086314CA796E00422C08 /* Icon72.png in Resources */,
+				0293086514CA7C1400422C08 /* NewsstandCoverArt.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +412,7 @@
 				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
 				INFOPLIST_FILE = "FullCircleReader/FullCircleReader-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -399,6 +424,7 @@
 				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
 				INFOPLIST_FILE = "FullCircleReader/FullCircleReader-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -456,6 +482,7 @@
 				0222908414C89819003643D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0222908514C89819003643D5 /* Build configuration list for PBXNativeTarget "FullCircleReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +491,7 @@
 				0222908714C89819003643D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

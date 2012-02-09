@@ -11,15 +11,25 @@
 #import "FCRModelController.h"
 
 #import "FCRDataViewController.h"
+#import "SBJson.h"
+#import <NewsstandKit/NewsstandKit.h>
 
 @interface FCRRootViewController ()
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
+@property (nonatomic) BOOL popoverVisible;
+
+- (void) initalizeIssueList;
 @end
 
 @implementation FCRRootViewController
 
 @synthesize pageViewController = _pageViewController;
 @synthesize modelController = _modelController;
+@synthesize issueListButton = _issueListButton;
+@synthesize issueListViewController = _issueListViewController;
+@synthesize trayListPopover = _trayListPopover;
+@synthesize popoverVisible;
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -49,7 +59,7 @@
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
     CGRect pageViewRect = self.view.bounds;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        pageViewRect = CGRectInset(pageViewRect, 40.0, 40.0);
+        pageViewRect = CGRectInset(pageViewRect, 50.0, 40.0);
     }
     self.pageViewController.view.frame = pageViewRect;
 
@@ -57,6 +67,49 @@
 
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+    
+    self.issueListViewController = [[FCRIssueListViewController alloc] initWithNibName:@"FCRIssueListViewController" bundle:[NSBundle mainBundle]];
+    popoverVisible = NO;
+    
+    [self initalizeIssueList];
+}
+
+- (void) initalizeIssueList  {
+    // Get the latest issue.
+    NSString *latestIssueUrl = @"http://notifier.fullcirclemagazine.org/en/latest.json";
+
+    NSLog(@"Retrieving latest issue info");
+    NSData *latestIssueData = 
+    [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:latestIssueUrl ]]
+                          returningResponse:nil 
+                                      error:nil];
+    NSString *latestJson = [[NSString alloc] initWithData:latestIssueData encoding:NSUTF8StringEncoding] ;
+    NSLog(@"Got: %@", latestJson);
+    
+    NSDictionary *latestIssueDict = [latestJson JSONValue];
+    
+    // Get the issue value # to build the other strings.
+    NSNumber *latestIssueNumber = [latestIssueDict valueForKey:@"mag"]; 
+    
+    for (int idx=[latestIssueNumber integerValue]; idx>=1; idx--)  {
+        NSString *issueUrl = [NSString stringWithFormat:@"http://notifier.fullcirclemagazine.org/en/mag/%d.json", idx];
+        NSLog(@"Trying to get issue info from %@", issueUrl);
+
+        NSError *error = nil;
+        NSData *issueData = 
+        [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:issueUrl ]]
+                              returningResponse:nil 
+                                          error:&error];
+        if (nil != error)  {
+            NSLog(@"Got an error trying to retrieve data for issue %d: %@", idx, [error localizedDescription]);
+        } else  {
+            NSString *issueJson = [[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] ;
+            NSLog(@"Got: %@", issueJson);
+            
+//            NSDictionary *issueDict = [latestJson JSONValue];
+        }
+        
+    }
 }
 
 - (void)viewDidUnload
@@ -145,7 +198,22 @@
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
 
 
-    return UIPageViewControllerSpineLocationMid;
+    return UIPageViewControllerSpineLocationMin;
+}
+
+-(IBAction) issueListButtonPushed:(id) sender  {
+    if (!popoverVisible)  {
+        self.trayListPopover = [[UIPopoverController alloc] initWithContentViewController:self.issueListViewController];
+        self.trayListPopover.delegate = self;
+        
+        [self.trayListPopover presentPopoverFromBarButtonItem:self.issueListButton 
+                                     permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                     animated:YES];
+        self.popoverVisible = YES;
+    } else  {
+        [self.trayListPopover dismissPopoverAnimated:YES];
+        self.popoverVisible = NO;
+    }
 }
 
 @end

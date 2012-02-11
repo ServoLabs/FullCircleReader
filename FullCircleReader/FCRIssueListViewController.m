@@ -7,8 +7,11 @@
 //
 
 #import "FCRIssueListViewController.h"
+#import <NewsstandKit/NewsstandKit.h>
 
 @implementation FCRIssueListViewController
+
+@synthesize issues = _issues;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,6 +52,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.issues = [[NKLibrary sharedLibrary] issues];
     [super viewWillAppear:animated];
 }
 
@@ -77,16 +81,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.issues count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,7 +99,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
+    cell.textLabel.text = [[self.issues objectAtIndex:indexPath.row] title];
     
     return cell;
 }

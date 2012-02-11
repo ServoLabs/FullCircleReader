@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <NewsstandKit/NewsstandKit.h>
 
 @interface FCRIssueListViewController : UITableViewController
+
+@property(nonatomic, strong) NSArray *issues;
 
 @end

@@ -71,7 +71,9 @@
     self.issueListViewController = [[FCRIssueListViewController alloc] initWithNibName:@"FCRIssueListViewController" bundle:[NSBundle mainBundle]];
     popoverVisible = NO;
     
-    [self initalizeIssueList];
+    if ([[[NKLibrary sharedLibrary ] issues] count] == 0)  {
+//        [self initalizeIssueList];
+    }
 }
 
 - (void) initalizeIssueList  {
@@ -91,7 +93,10 @@
     // Get the issue value # to build the other strings.
     NSNumber *latestIssueNumber = [latestIssueDict valueForKey:@"mag"]; 
     
-    for (int idx=[latestIssueNumber integerValue]; idx>=1; idx--)  {
+    NKLibrary *myLibrary = [NKLibrary sharedLibrary];
+    NSDate *issueDate = [NSDate date];
+    
+    for (NSInteger idx=[latestIssueNumber integerValue]; idx>=1; idx--)  {
         NSString *issueUrl = [NSString stringWithFormat:@"http://notifier.fullcirclemagazine.org/en/mag/%d.json", idx];
         NSLog(@"Trying to get issue info from %@", issueUrl);
 
@@ -106,7 +111,20 @@
             NSString *issueJson = [[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] ;
             NSLog(@"Got: %@", issueJson);
             
-//            NSDictionary *issueDict = [latestJson JSONValue];
+            NSDictionary *issueDict = [issueJson JSONValue];
+            NSString *issueName = [issueDict valueForKey:@"title"];
+            if ([issueName isEqual:[NSNull null]])  {
+                issueName = [issueDict valueForKey:@"desc"];
+            }
+            if ([issueName isEqual:[NSNull null]])  {
+                issueName = [NSString stringWithFormat:@"Issue #%d", idx + 1];
+            }
+            NKIssue *issue = [myLibrary addIssueWithName:issueName date:issueDate];
+            
+            if (idx == [latestIssueNumber integerValue])  {
+                [myLibrary setCurrentlyReadingIssue:issue];
+            }
+            
         }
         
     }
@@ -145,7 +163,8 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
-        return YES;
+        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || 
+                (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
     }
 }
 

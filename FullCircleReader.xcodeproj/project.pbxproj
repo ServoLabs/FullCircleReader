@@ -38,6 +38,7 @@
 		0241CF3114E37D9F0058E608 /* FCRIssueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0241CF2F14E37D9F0058E608 /* FCRIssueListViewController.m */; };
 		0241CF3214E37D9F0058E608 /* FCRIssueListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0241CF3014E37D9F0058E608 /* FCRIssueListViewController.xib */; };
 		0241CF3914E381620058E608 /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0241CF3714E3814C0058E608 /* NewsstandKit.framework */; };
+		02759C0614E71282007B0F4B /* IssueCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02759C0514E71282007B0F4B /* IssueCatalog.plist */; };
 		0293086114CA796E00422C08 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293085E14CA796E00422C08 /* circle.png */; };
 		0293086214CA796E00422C08 /* fcnewlogo.png.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */; };
 		0293086314CA796E00422C08 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293086014CA796E00422C08 /* Icon72.png */; };
@@ -108,6 +109,7 @@
 		0241CF2F14E37D9F0058E608 /* FCRIssueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCRIssueListViewController.m; sourceTree = "<group>"; };
 		0241CF3014E37D9F0058E608 /* FCRIssueListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FCRIssueListViewController.xib; sourceTree = "<group>"; };
 		0241CF3714E3814C0058E608 /* NewsstandKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewsstandKit.framework; path = System/Library/Frameworks/NewsstandKit.framework; sourceTree = SDKROOT; };
+		02759C0514E71282007B0F4B /* IssueCatalog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IssueCatalog.plist; sourceTree = "<group>"; };
 		0293085E14CA796E00422C08 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fcnewlogo.png.jpg; sourceTree = "<group>"; };
 		0293086014CA796E00422C08 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				0241CF2F14E37D9F0058E608 /* FCRIssueListViewController.m */,
 				0241CF3014E37D9F0058E608 /* FCRIssueListViewController.xib */,
 				0222905114C89818003643D5 /* Supporting Files */,
+				02759C0514E71282007B0F4B /* IssueCatalog.plist */,
 			);
 			path = FullCircleReader;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				0293086314CA796E00422C08 /* Icon72.png in Resources */,
 				0293086514CA7C1400422C08 /* NewsstandCoverArt.jpg in Resources */,
 				0241CF3214E37D9F0058E608 /* FCRIssueListViewController.xib in Resources */,
+				02759C0614E71282007B0F4B /* IssueCatalog.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

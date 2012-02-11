@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BackIssues</key>
+	<array>
+		<dict>
+			<key>ContentUrl</key>
+			<string>http://dl.fullcirclemagazine.org/issue53_en.pdf</string>
+			<key>Name</key>
+			<string>Issue 53</string>
+			<key>PubDate</key>
+			<date>2011-09-01T17:00:00Z</date>
+			<key>SubTitle</key>
+			<string>Backup Strategy - Part 1</string>
+		</dict>
+		<dict>
+			<key>ContentUrl</key>
+			<string>http://dl.fullcirclemagazine.org/issue54_en.pdf</string>
+			<key>Name</key>
+			<string>Issue 54</string>
+			<key>PubDate</key>
+			<date>2011-10-01T17:00:00Z</date>
+			<key>SubTitle</key>
+			<string>Closing Windows</string>
+		</dict>
+		<dict>
+			<key>ContentUrl</key>
+			<string>http://dl.fullcirclemagazine.org/issue55_en.pdf</string>
+			<key>Name</key>
+			<string>Issue 55</string>
+			<key>PubDate</key>
+			<date>2011-11-01T17:00:00Z</date>
+			<key>SubTitle</key>
+			<string>Audacity Basics</string>
+		</dict>
+		<dict>
+			<key>ContentUrl</key>
+			<string>http://dl.fullcirclemagazine.org/issue56_en.pdf</string>
+			<key>Name</key>
+			<string>Issue 56</string>
+			<key>PubDate</key>
+			<date>2011-12-01T18:00:00Z</date>
+			<key>SubTitle</key>
+			<string>Bigger Issue with More Games!</string>
+		</dict>
+		<dict>
+			<key>ContentUrl</key>
+			<string>http://dl.fullcirclemagazine.org/issue57_en.pdf</string>
+			<key>SubTitle</key>
+			<string>Enlightenment 17</string>
+			<key>PubDate</key>
+			<date>2012-01-01T18:00:00Z</date>
+			<key>Name</key>
+			<string>Issue 57</string>
+		</dict>
+	</array>
+</dict>
+</plist>

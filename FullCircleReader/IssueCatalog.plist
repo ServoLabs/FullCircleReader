@@ -5,6 +5,8 @@
 	<key>BackIssues</key>
 	<array>
 		<dict>
+			<key>CoverImageUrl</key>
+			<string>http://dl.fullcirclemagazine.org/cover/53/en.jpg</string>
 			<key>ContentUrl</key>
 			<string>http://dl.fullcirclemagazine.org/issue53_en.pdf</string>
 			<key>Name</key>
@@ -15,6 +17,8 @@
 			<string>Backup Strategy - Part 1</string>
 		</dict>
 		<dict>
+			<key>CoverImageUrl</key>
+			<string>http://dl.fullcirclemagazine.org/cover/54/en.jpg</string>
 			<key>ContentUrl</key>
 			<string>http://dl.fullcirclemagazine.org/issue54_en.pdf</string>
 			<key>Name</key>
@@ -25,6 +29,8 @@
 			<string>Closing Windows</string>
 		</dict>
 		<dict>
+			<key>CoverImageUrl</key>
+			<string>http://dl.fullcirclemagazine.org/cover/55/en.jpg</string>
 			<key>ContentUrl</key>
 			<string>http://dl.fullcirclemagazine.org/issue55_en.pdf</string>
 			<key>Name</key>
@@ -35,6 +41,8 @@
 			<string>Audacity Basics</string>
 		</dict>
 		<dict>
+			<key>CoverImageUrl</key>
+			<string>http://dl.fullcirclemagazine.org/cover/56/en.jpg</string>
 			<key>ContentUrl</key>
 			<string>http://dl.fullcirclemagazine.org/issue56_en.pdf</string>
 			<key>Name</key>
@@ -45,6 +53,8 @@
 			<string>Bigger Issue with More Games!</string>
 		</dict>
 		<dict>
+			<key>CoverImageUrl</key>
+			<string>http://dl.fullcirclemagazine.org/cover/57/en.jpg</string>
 			<key>ContentUrl</key>
 			<string>http://dl.fullcirclemagazine.org/issue57_en.pdf</string>
 			<key>SubTitle</key>

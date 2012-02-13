@@ -19,6 +19,7 @@
 @property (nonatomic) BOOL popoverVisible;
 
 - (void) initalizeIssueList;
+-(void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
 @end
 
 @implementation FCRRootViewController
@@ -42,6 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
 	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller.
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -72,62 +74,52 @@
     popoverVisible = NO;
     
     if ([[[NKLibrary sharedLibrary ] issues] count] == 0)  {
-//        [self initalizeIssueList];
+        [self initalizeIssueList];
     }
 }
 
 - (void) initalizeIssueList  {
-    // Get the latest issue.
-    NSString *latestIssueUrl = @"http://notifier.fullcirclemagazine.org/en/latest.json";
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"IssueCatalog" ofType:@"plist"];
+    NSDictionary *issueCatalogDict = [[NSDictionary alloc] initWithContentsOfFile:path];
 
-    NSLog(@"Retrieving latest issue info");
-    NSData *latestIssueData = 
-    [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:latestIssueUrl ]]
-                          returningResponse:nil 
-                                      error:nil];
-    NSString *latestJson = [[NSString alloc] initWithData:latestIssueData encoding:NSUTF8StringEncoding] ;
-    NSLog(@"Got: %@", latestJson);
-    
-    NSDictionary *latestIssueDict = [latestJson JSONValue];
-    
-    // Get the issue value # to build the other strings.
-    NSNumber *latestIssueNumber = [latestIssueDict valueForKey:@"mag"]; 
-    
+    NSArray *backIssues = [issueCatalogDict valueForKey:@"BackIssues"];
     NKLibrary *myLibrary = [NKLibrary sharedLibrary];
-    NSDate *issueDate = [NSDate date];
-    
-    for (NSInteger idx=[latestIssueNumber integerValue]; idx>=1; idx--)  {
-        NSString *issueUrl = [NSString stringWithFormat:@"http://notifier.fullcirclemagazine.org/en/mag/%d.json", idx];
-        NSLog(@"Trying to get issue info from %@", issueUrl);
-
-        NSError *error = nil;
-        NSData *issueData = 
-        [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:issueUrl ]]
-                              returningResponse:nil 
-                                          error:&error];
-        if (nil != error)  {
-            NSLog(@"Got an error trying to retrieve data for issue %d: %@", idx, [error localizedDescription]);
-        } else  {
-            NSString *issueJson = [[NSString alloc] initWithData:issueData encoding:NSUTF8StringEncoding] ;
-            NSLog(@"Got: %@", issueJson);
-            
-            NSDictionary *issueDict = [issueJson JSONValue];
-            NSString *issueName = [issueDict valueForKey:@"title"];
-            if ([issueName isEqual:[NSNull null]])  {
-                issueName = [issueDict valueForKey:@"desc"];
-            }
-            if ([issueName isEqual:[NSNull null]])  {
-                issueName = [NSString stringWithFormat:@"Issue #%d", idx + 1];
-            }
-            NKIssue *issue = [myLibrary addIssueWithName:issueName date:issueDate];
-            
-            if (idx == [latestIssueNumber integerValue])  {
-                [myLibrary setCurrentlyReadingIssue:issue];
-            }
-            
-        }
+    NKIssue *latestIssue = nil;
+    NSDictionary *latestIssueMetaData = nil;
+    for(NSDictionary *issueData in backIssues)  {
+        NSMutableDictionary *savedIssueData = [NSMutableDictionary dictionaryWithDictionary:issueData];
+        NSDate *pubDate = [savedIssueData valueForKey:@"PubDate"];
+        NKIssue *issue = [myLibrary addIssueWithName:[savedIssueData valueForKey:@"Name"] date:pubDate];
         
+        NSURL *coverImageUrl = [NSURL URLWithString:[savedIssueData valueForKey:@"CoverImageUrl"]];
+        UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverImageUrl]];
+        
+        NSURL *savedCoverImagePath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
+        [UIImagePNGRepresentation(coverImage) writeToURL:savedCoverImagePath atomically:YES];
+        
+        [savedIssueData setValue:[NSNumber numberWithBool:NO] forKey:@"ContentWasDownloaded"];
+
+        NSURL *metaDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+        [savedIssueData writeToURL:metaDataPath atomically:YES];
+
+        if (latestIssue == nil)  {
+            latestIssue = issue;
+            latestIssueMetaData = savedIssueData;
+        } else if ([latestIssue.date laterDate:issue.date] == issue.date)  {
+            latestIssue = issue;
+            latestIssueMetaData = savedIssueData;
+        }
     }
+    
+    [myLibrary setCurrentlyReadingIssue:latestIssue];
+    
+    // Start downloading latest issue
+    NSString *contentUrl = [latestIssueMetaData valueForKey:@"ContentUrl"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
+    NKAssetDownload *asset = [latestIssue addAssetWithRequest:request];
+    [asset downloadWithDelegate:self]; 
+
 }
 
 - (void)viewDidUnload
@@ -235,4 +227,46 @@
     }
 }
 
+#pragma mark - NSURLConnectionDownloadDelegate  
+
+-(void) connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL  {
+    NKAssetDownload *asset = connection.newsstandAssetDownload;
+    NKIssue *issue = asset.issue;
+    
+    [[NSFileManager defaultManager] copyItemAtURL:destinationURL toURL:issue.contentURL error:nil];
+    
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
+    
+    [issueData setValue:[NSNumber numberWithBool:YES] forKey:@"ContentWasDownloaded"];
+    
+    [issueData writeToURL:issueDataPath atomically:YES];
+
+    [self.issueListViewController.tableView reloadData];
+}
+
+-(void) connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes  {
+    [self writeDownloadProgressToFile:connection withProgress:((float)totalBytesWritten / (float)expectedTotalBytes)];
+    [self.issueListViewController.tableView reloadData];
+}
+
+-(void) connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes  {
+
+    [self writeDownloadProgressToFile:connection withProgress:((float)totalBytesWritten / (float)expectedTotalBytes)];
+    [self.issueListViewController.tableView reloadData];    
+}
+
+-(void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress  {
+    NKAssetDownload *asset = connection.newsstandAssetDownload;
+    NKIssue *issue = asset.issue;
+    
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
+    
+    [issueData setValue:[NSNumber numberWithFloat:progress] forKey:@"DownloadProgress"];
+    
+    [issueData writeToURL:issueDataPath atomically:YES];
+    NSLog(@"Writing progress of %f to the dictionary.", progress);
+
+}
 @end

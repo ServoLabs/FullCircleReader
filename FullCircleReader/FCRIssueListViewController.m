@@ -8,6 +8,7 @@
 
 #import "FCRIssueListViewController.h"
 #import <NewsstandKit/NewsstandKit.h>
+#import "IssueCellView.h"
 
 @implementation FCRIssueListViewController
 
@@ -85,6 +86,10 @@
     return 1;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  {
+    return 80;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.issues count];
@@ -92,14 +97,49 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"IssueCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    IssueCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"IssueCellView"
+                                                                 owner:self options:nil];
+        for(id currentObject in topLevelObjects)  {
+            if ([currentObject isKindOfClass:[UITableViewCell class]])  {
+                cell = (IssueCellView*) currentObject;
+            }
+        }
     }
     
-    cell.textLabel.text = [[self.issues objectAtIndex:indexPath.row] title];
+    NKIssue *issue = [self.issues objectAtIndex:indexPath.row];
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
+    NSURL *coverArtPath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
+    UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverArtPath]];
+    
+    cell.nameLabel.text = issue.name;
+    cell.subTitleLabel.text = [issueData valueForKey:@"SubTitle"];
+    cell.publicationDateLabel.text = @"Not showing dates yet.";
+    cell.coverImage.image = coverImage;
+    cell.spinner.hidden = YES;
+    cell.progressView.hidden = YES;
+    if ([[issueData valueForKey:@"ContentWasDownloaded"] boolValue])  {
+        cell.downloadButton.hidden = YES;
+        cell.subTitleLabel.hidden = NO;
+    } else  {
+        cell.downloadButton.hidden = NO;        
+        if ([issue.downloadingAssets count] != 0)  {
+            //cell.spinner.hidden = NO;
+            //[cell.spinner startAnimating];
+            cell.progressView.hidden = NO;
+            cell.subTitleLabel.hidden = YES;
+            
+            float downloadProgress = [[issueData valueForKey:@"DownloadProgress"] floatValue];
+            NSLog(@"Issue: %@  -- Download Progress: %f", issue.name, downloadProgress);
+            cell.progressView.progress = [[issueData valueForKey:@"DownloadProgress"] floatValue];
+        }
+    }
     
     return cell;
 }

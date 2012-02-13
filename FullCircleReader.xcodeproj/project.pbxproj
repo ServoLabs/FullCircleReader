@@ -39,10 +39,12 @@
 		0241CF3214E37D9F0058E608 /* FCRIssueListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0241CF3014E37D9F0058E608 /* FCRIssueListViewController.xib */; };
 		0241CF3914E381620058E608 /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0241CF3714E3814C0058E608 /* NewsstandKit.framework */; };
 		02759C0614E71282007B0F4B /* IssueCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02759C0514E71282007B0F4B /* IssueCatalog.plist */; };
+		02759C0E14E76DDD007B0F4B /* IssueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02759C0D14E76DDD007B0F4B /* IssueCellView.m */; };
 		0293086114CA796E00422C08 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293085E14CA796E00422C08 /* circle.png */; };
 		0293086214CA796E00422C08 /* fcnewlogo.png.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */; };
 		0293086314CA796E00422C08 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293086014CA796E00422C08 /* Icon72.png */; };
 		0293086514CA7C1400422C08 /* NewsstandCoverArt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */; };
+		029F051914E88A8300734849 /* IssueCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029F051814E88A8300734849 /* IssueCellView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,10 +112,13 @@
 		0241CF3014E37D9F0058E608 /* FCRIssueListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FCRIssueListViewController.xib; sourceTree = "<group>"; };
 		0241CF3714E3814C0058E608 /* NewsstandKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewsstandKit.framework; path = System/Library/Frameworks/NewsstandKit.framework; sourceTree = SDKROOT; };
 		02759C0514E71282007B0F4B /* IssueCatalog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IssueCatalog.plist; sourceTree = "<group>"; };
+		02759C0C14E76DDC007B0F4B /* IssueCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueCellView.h; sourceTree = "<group>"; };
+		02759C0D14E76DDD007B0F4B /* IssueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueCellView.m; sourceTree = "<group>"; };
 		0293085E14CA796E00422C08 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fcnewlogo.png.jpg; sourceTree = "<group>"; };
 		0293086014CA796E00422C08 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
 		0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NewsstandCoverArt.jpg; sourceTree = "<group>"; };
+		029F051814E88A8300734849 /* IssueCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCellView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +197,9 @@
 				0241CF3014E37D9F0058E608 /* FCRIssueListViewController.xib */,
 				0222905114C89818003643D5 /* Supporting Files */,
 				02759C0514E71282007B0F4B /* IssueCatalog.plist */,
+				02759C0C14E76DDC007B0F4B /* IssueCellView.h */,
+				02759C0D14E76DDD007B0F4B /* IssueCellView.m */,
+				029F051814E88A8300734849 /* IssueCellView.xib */,
 			);
 			path = FullCircleReader;
 			sourceTree = "<group>";
@@ -349,6 +357,7 @@
 				0293086514CA7C1400422C08 /* NewsstandCoverArt.jpg in Resources */,
 				0241CF3214E37D9F0058E608 /* FCRIssueListViewController.xib in Resources */,
 				02759C0614E71282007B0F4B /* IssueCatalog.plist in Resources */,
+				029F051914E88A8300734849 /* IssueCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +410,7 @@
 				0241CF2C14E37D6F0058E608 /* SBJsonUTF8Stream.m in Sources */,
 				0241CF2D14E37D6F0058E608 /* SBJsonWriter.m in Sources */,
 				0241CF3114E37D9F0058E608 /* FCRIssueListViewController.m in Sources */,
+				02759C0E14E76DDD007B0F4B /* IssueCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

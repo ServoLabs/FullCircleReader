@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "FCRIssueListViewController.h"
 
-@interface FCRRootViewController : UIViewController <UIPageViewControllerDelegate, UIPopoverControllerDelegate>
+@interface FCRRootViewController : UIViewController <UIPageViewControllerDelegate, UIPopoverControllerDelegate,
+                                                    NSURLConnectionDownloadDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *issueListButton;
 @property(nonatomic, strong) FCRIssueListViewController *issueListViewController;
 @property(nonatomic, strong) UIPopoverController *trayListPopover;
-
 
 -(IBAction) issueListButtonPushed:(id) sender;
 

@@ -13,6 +13,8 @@
 @implementation FCRIssueListViewController
 
 @synthesize issues = _issues;
+@synthesize displayIssue = _displayIssue;
+@synthesize downloadIssue = _downloadIssue;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -130,10 +132,9 @@
     } else  {
         cell.downloadButton.hidden = NO;        
         if ([issue.downloadingAssets count] != 0)  {
-            //cell.spinner.hidden = NO;
-            //[cell.spinner startAnimating];
             cell.progressView.hidden = NO;
             cell.subTitleLabel.hidden = YES;
+            cell.downloadButton.hidden = YES;
             
             float downloadProgress = [[issueData valueForKey:@"DownloadProgress"] floatValue];
             NSLog(@"Issue: %@  -- Download Progress: %f", issue.name, downloadProgress);
@@ -187,13 +188,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NKIssue *issue = [self.issues objectAtIndex:indexPath.row];
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
+    
+    // If the issue has been downloaded, then open it up in the reader.
+    if ([[issueData valueForKey:@"ContentWasDownloaded"] boolValue])  {
+        [self displayIssue](issue);
+    } else  {
+        // If the issue hasn't been downloaded, then selecting a row will make a request
+        // to start downloading this issue.
+        if ([issue.downloadingAssets count] == 0)  {
+            [self downloadIssue](issue);
+        }
+    }
+    
+    // If the issue is currently downloading then do nothing.
 }
 
 @end

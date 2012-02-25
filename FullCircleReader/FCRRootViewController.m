@@ -12,7 +12,6 @@
 
 #import "FCRDataViewController.h"
 #import "SBJson.h"
-#import <NewsstandKit/NewsstandKit.h>
 
 @interface FCRRootViewController ()
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
@@ -71,6 +70,16 @@
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
     
     self.issueListViewController = [[FCRIssueListViewController alloc] initWithNibName:@"FCRIssueListViewController" bundle:[NSBundle mainBundle]];
+    
+    __block __typeof__(self) blockSelf = self;
+    self.issueListViewController.downloadIssue = ^(NKIssue* issue) {
+        [blockSelf startDownloadingIssue:issue];
+    };
+    
+    self.issueListViewController.displayIssue = ^(NKIssue *issue) {
+        [blockSelf openIssue:issue];
+    };
+    
     popoverVisible = NO;
     
     if ([[[NKLibrary sharedLibrary ] issues] count] == 0)  {
@@ -114,12 +123,23 @@
     
     [myLibrary setCurrentlyReadingIssue:latestIssue];
     
-    // Start downloading latest issue
-    NSString *contentUrl = [latestIssueMetaData valueForKey:@"ContentUrl"];
+    [self startDownloadingIssue:latestIssue];
+
+}
+
+- (void) startDownloadingIssue:(NKIssue *)issue  {
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
+
+    NSString *contentUrl = [issueData valueForKey:@"ContentUrl"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
-    NKAssetDownload *asset = [latestIssue addAssetWithRequest:request];
+    NKAssetDownload *asset = [issue addAssetWithRequest:request];
     [asset downloadWithDelegate:self]; 
 
+}
+
+- (void) openIssue:(NKIssue *)issue  {
+    // Display the current issue in the main PDF viewer.
 }
 
 - (void)viewDidUnload

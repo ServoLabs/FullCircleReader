@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <NewsstandKit/NewsstandKit.h>
 #import "FCRIssueListViewController.h"
 
 @interface FCRRootViewController : UIViewController <UIPageViewControllerDelegate, UIPopoverControllerDelegate,
@@ -18,5 +19,6 @@
 @property(nonatomic, strong) UIPopoverController *trayListPopover;
 
 -(IBAction) issueListButtonPushed:(id) sender;
+- (void) startDownloadingIssue:(NKIssue *)issue;
 
 @end

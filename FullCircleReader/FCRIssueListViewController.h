@@ -12,5 +12,7 @@
 @interface FCRIssueListViewController : UITableViewController
 
 @property(nonatomic, strong) NSArray *issues;
+@property (copy, nonatomic) void (^displayIssue) (NKIssue*) ;
+@property (copy, nonatomic) void (^downloadIssue) (NKIssue*) ;
 
 @end

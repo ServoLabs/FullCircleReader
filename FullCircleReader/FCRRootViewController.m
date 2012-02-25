@@ -253,7 +253,10 @@
     NKAssetDownload *asset = connection.newsstandAssetDownload;
     NKIssue *issue = asset.issue;
     
-    [[NSFileManager defaultManager] copyItemAtURL:destinationURL toURL:issue.contentURL error:nil];
+    NSURL *issueContentPath = [issue.contentURL URLByAppendingPathComponent:@"IssueContent.pdf"];
+    [[NSFileManager defaultManager] copyItemAtURL:destinationURL toURL:issueContentPath error:nil];
+    
+    // We need some error handling here just in case we couldn't copy the issue content.
     
     NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
     NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];

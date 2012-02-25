@@ -122,10 +122,17 @@
     
     cell.nameLabel.text = issue.name;
     cell.subTitleLabel.text = [issueData valueForKey:@"SubTitle"];
-    cell.publicationDateLabel.text = @"Not showing dates yet.";
     cell.coverImage.image = coverImage;
     cell.spinner.hidden = YES;
     cell.progressView.hidden = YES;
+ 
+    // Set the publication date label
+    NSDate *today = [issueData valueForKey:@"PubDate"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MMMM, YYYY"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+    cell.publicationDateLabel.text = dateString;
+    
     if ([[issueData valueForKey:@"ContentWasDownloaded"] boolValue])  {
         cell.downloadButton.hidden = YES;
         cell.subTitleLabel.hidden = NO;

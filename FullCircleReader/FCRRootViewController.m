@@ -18,7 +18,11 @@
 @property (nonatomic) BOOL popoverVisible;
 
 - (void) initalizeIssueList;
--(void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
+- (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
+- (void) openIssue:(NKIssue *)issue;
+
+- (void) registerForRemotePushNotifications;  
+
 @end
 
 @implementation FCRRootViewController

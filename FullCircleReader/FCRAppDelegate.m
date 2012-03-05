@@ -15,6 +15,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge)];
     return YES;
 }
 
@@ -55,6 +57,19 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark Push Notification callback methods
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken  {
+    NSString *deviceTokenString = [[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""];
+    deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString: @">" withString: @""] ;
+    deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSLog(@"Push Notification Token: %@", deviceTokenString);
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err  {
+    NSLog(@"Couldn't register for remote notifications: %@", [err localizedDescription]);
 }
 
 @end

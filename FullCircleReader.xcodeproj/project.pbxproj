@@ -46,6 +46,9 @@
 		0293086514CA7C1400422C08 /* NewsstandCoverArt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */; };
 		029F051914E88A8300734849 /* IssueCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029F051814E88A8300734849 /* IssueCellView.xib */; };
 		02F9279214F9765A006C3D9C /* Knob Download.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F9279114F9765A006C3D9C /* Knob Download.png */; };
+		3D8CBA41150400E700BA998E /* issue58_en.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D8CBA40150400E700BA998E /* issue58_en.pdf */; };
+		3D99E66215031CBA00CCB0D3 /* PDFPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D99E66115031CBA00CCB0D3 /* PDFPageView.xib */; };
+		3D99E66515031D2100CCB0D3 /* PDFPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D99E66415031D2100CCB0D3 /* PDFPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +124,10 @@
 		0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NewsstandCoverArt.jpg; sourceTree = "<group>"; };
 		029F051814E88A8300734849 /* IssueCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCellView.xib; sourceTree = "<group>"; };
 		02F9279114F9765A006C3D9C /* Knob Download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Knob Download.png"; sourceTree = "<group>"; };
+		3D8CBA40150400E700BA998E /* issue58_en.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = issue58_en.pdf; sourceTree = "<group>"; };
+		3D99E66115031CBA00CCB0D3 /* PDFPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFPageView.xib; sourceTree = "<group>"; };
+		3D99E66315031D2100CCB0D3 /* PDFPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageView.h; sourceTree = "<group>"; };
+		3D99E66415031D2100CCB0D3 /* PDFPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +189,7 @@
 		0222905014C89818003643D5 /* FullCircleReader */ = {
 			isa = PBXGroup;
 			children = (
+				3D99E65F15031BDA00CCB0D3 /* PDFViewer */,
 				0241CF0814E37D6F0058E608 /* json-framework */,
 				0293085D14CA796E00422C08 /* Images */,
 				0222905914C89818003643D5 /* FCRAppDelegate.h */,
@@ -280,6 +288,17 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		3D99E65F15031BDA00CCB0D3 /* PDFViewer */ = {
+			isa = PBXGroup;
+			children = (
+				3D8CBA40150400E700BA998E /* issue58_en.pdf */,
+				3D99E66115031CBA00CCB0D3 /* PDFPageView.xib */,
+				3D99E66315031D2100CCB0D3 /* PDFPageView.h */,
+				3D99E66415031D2100CCB0D3 /* PDFPageView.m */,
+			);
+			name = PDFViewer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -362,6 +381,8 @@
 				02759C0614E71282007B0F4B /* IssueCatalog.plist in Resources */,
 				029F051914E88A8300734849 /* IssueCellView.xib in Resources */,
 				02F9279214F9765A006C3D9C /* Knob Download.png in Resources */,
+				3D99E66215031CBA00CCB0D3 /* PDFPageView.xib in Resources */,
+				3D8CBA41150400E700BA998E /* issue58_en.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +436,7 @@
 				0241CF2D14E37D6F0058E608 /* SBJsonWriter.m in Sources */,
 				0241CF3114E37D9F0058E608 /* FCRIssueListViewController.m in Sources */,
 				02759C0E14E76DDD007B0F4B /* IssueCellView.m in Sources */,
+				3D99E66515031D2100CCB0D3 /* PDFPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

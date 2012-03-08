@@ -9,7 +9,7 @@
 #import "FCRModelController.h"
 
 #import "FCRDataViewController.h"
-
+#import "PDFPageView.h"
 /*
  A controller object that manages a simple model -- a collection of month names.
  
@@ -20,20 +20,26 @@
  */
 
 @interface FCRModelController()
-@property (readonly, strong, nonatomic) NSArray *pageData;
+@property (strong, nonatomic) NSMutableArray *pageData;
+- (NSURL*) getIssueContentPath;
+- (void) initializePDFPageNumbers;
+- (NSInteger) getNumberOfPages;
+- (void) initializePageData;
 @end
 
 @implementation FCRModelController
 
 @synthesize pageData = _pageData;
-
+@synthesize currentIssue = _currentIssue;
+NSString * const IssueContentPDF = @"IssueContent.pdf";
+NSString * const PageNumberFormat = @"Page - %d";
 - (id)init
 {
     self = [super init];
     if (self) {
         // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+        [self initializePageData];
+       
     }
     return self;
 }
@@ -48,7 +54,60 @@
     // Create a new view controller and pass suitable data.
     FCRDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"FCRDataViewController"];
     dataViewController.dataObject = [self.pageData objectAtIndex:index];
+    [self loadPDFPageView:index intoViewController:dataViewController];
     return dataViewController;
+}
+
+
+#pragma mark -PDFViewLoader
+
+- (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController
+{
+    [self initializePDFPageNumbers];
+    NSInteger physicalPageNumber = index + 1;
+    NSURL *issueContentPath = [self getIssueContentPath];
+    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)issueContentPath);
+    CGPDFPageRef page = CGPDFDocumentGetPage(pdfDocument, physicalPageNumber);
+    CGPDFPageRetain(page);    
+    PDFPageView *pageView = [[PDFPageView alloc] init];
+    pageView.page = page;
+    pageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;    
+    pageView.backgroundColor = [UIColor whiteColor];
+    dataViewController.view = pageView;
+    //[dataViewController.view addSubview: pageView];
+    //pageView.frame = CGRectMake(0, 100, 320, 160);
+    
+}
+
+- (void) initializePDFPageNumbers{
+    NSInteger numberOfPages = [self getNumberOfPages];
+    NSMutableArray* pageData = [NSMutableArray arrayWithCapacity: numberOfPages];    
+    for (NSInteger pageIndex = 1; pageIndex <= numberOfPages; pageIndex++) {
+        [pageData addObject: [NSString stringWithFormat:PageNumberFormat, pageIndex]];
+    }
+    self.pageData= pageData;
+}
+
+- (NSInteger) getNumberOfPages{
+    NSURL *issueContentPath = [self getIssueContentPath];
+    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)issueContentPath);
+    NSInteger numberOfPages = CGPDFDocumentGetNumberOfPages(pdfDocument);
+    return numberOfPages;
+}
+
+- (NSURL*) getIssueContentPath {
+    NSURL *issueContentPath = [self.currentIssue.contentURL URLByAppendingPathComponent:IssueContentPDF];
+    return issueContentPath;
+}
+
+- (void) initializePageData {
+    
+    if(self.currentIssue == nil) {
+        self.pageData = [NSMutableArray arrayWithCapacity:1];
+        [self.pageData addObject:[NSString stringWithFormat:PageNumberFormat, 1]];        
+        return;
+    }        
+    [self initializePDFPageNumbers];
 }
 
 - (NSUInteger)indexOfViewController:(FCRDataViewController *)viewController
@@ -67,8 +126,7 @@
     NSUInteger index = [self indexOfViewController:(FCRDataViewController *)viewController];
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
-    }
-    
+    }    
     index--;
     return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
 }
@@ -78,13 +136,13 @@
     NSUInteger index = [self indexOfViewController:(FCRDataViewController *)viewController];
     if (index == NSNotFound) {
         return nil;
-    }
-    
+    }    
     index++;
     if (index == [self.pageData count]) {
         return nil;
     }
     return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
 }
+
 
 @end

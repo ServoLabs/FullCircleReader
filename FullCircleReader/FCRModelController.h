@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <NewsstandKit/NewsstandKit.h>
 @class FCRDataViewController;
 
 @interface FCRModelController : NSObject <UIPageViewControllerDataSource>
 - (FCRDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(FCRDataViewController *)viewController;
+- (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController;
+@property(nonatomic, strong) NKIssue *currentIssue;
 @end

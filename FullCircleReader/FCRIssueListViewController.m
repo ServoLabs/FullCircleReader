@@ -16,6 +16,7 @@
 @synthesize displayIssue = _displayIssue;
 @synthesize downloadIssue = _downloadIssue;
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -201,7 +202,9 @@
     
     // If the issue has been downloaded, then open it up in the reader.
     if ([[issueData valueForKey:@"ContentWasDownloaded"] boolValue])  {
-        [self displayIssue](issue);
+       
+        [self displayIssue](issue);        
+
     } else  {
         // If the issue hasn't been downloaded, then selecting a row will make a request
         // to start downloading this issue.

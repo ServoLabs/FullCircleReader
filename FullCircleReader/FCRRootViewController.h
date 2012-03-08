@@ -20,5 +20,6 @@
 
 -(IBAction) issueListButtonPushed:(id) sender;
 - (void) startDownloadingIssue:(NKIssue *)issue;
+- (void) openIssue:(NKIssue *)issue ;
 
 @end

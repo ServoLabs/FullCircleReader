@@ -21,13 +21,7 @@
 - (void) setupPageViewController:(NSInteger)viewControllerIndex;
 - (void) initalizeIssueList;
 - (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
-<<<<<<< HEAD
-- (void) openIssue:(NKIssue *)issue;
 
-- (void) registerForRemotePushNotifications;  
-
-=======
->>>>>>> master
 @end
 
 @implementation FCRRootViewController;

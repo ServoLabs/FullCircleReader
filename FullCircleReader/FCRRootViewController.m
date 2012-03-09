@@ -7,25 +7,30 @@
 //
 
 #import "FCRRootViewController.h"
-
+#import "PDFPageView.h"
 #import "FCRModelController.h"
 
 #import "FCRDataViewController.h"
 #import "SBJson.h"
+#import <UIKit/UIKit.h>
 
 @interface FCRRootViewController ()
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
 @property (nonatomic) BOOL popoverVisible;
 
+- (void) setupPageViewController:(NSInteger)viewControllerIndex;
 - (void) initalizeIssueList;
 - (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
+<<<<<<< HEAD
 - (void) openIssue:(NKIssue *)issue;
 
 - (void) registerForRemotePushNotifications;  
 
+=======
+>>>>>>> master
 @end
 
-@implementation FCRRootViewController
+@implementation FCRRootViewController;
 
 @synthesize pageViewController = _pageViewController;
 @synthesize modelController = _modelController;
@@ -47,31 +52,7 @@
 {
     [super viewDidLoad];
         
-	// Do any additional setup after loading the view, typically from a nib.
-    // Configure the page view controller and add it as a child view controller.
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    self.pageViewController.delegate = self;
-
-    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
-    NSArray *viewControllers = [NSArray arrayWithObject:startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
-
-    self.pageViewController.dataSource = self.modelController;
-
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
-
-    // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
-    CGRect pageViewRect = self.view.bounds;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        pageViewRect = CGRectInset(pageViewRect, 50.0, 40.0);
-    }
-    self.pageViewController.view.frame = pageViewRect;
-
-    [self.pageViewController didMoveToParentViewController:self];    
-
-    // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
-    self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+    [self setupPageViewController:0];
     
     self.issueListViewController = [[FCRIssueListViewController alloc] initWithNibName:@"FCRIssueListViewController" bundle:[NSBundle mainBundle]];
     
@@ -123,10 +104,8 @@
             latestIssue = issue;
             latestIssueMetaData = savedIssueData;
         }
-    }
-    
-    [myLibrary setCurrentlyReadingIssue:latestIssue];
-    
+    }    
+    [myLibrary setCurrentlyReadingIssue:latestIssue];    
     [self startDownloadingIssue:latestIssue];
 
 }
@@ -134,7 +113,6 @@
 - (void) startDownloadingIssue:(NKIssue *)issue  {
     NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
     NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
-
     NSString *contentUrl = [issueData valueForKey:@"ContentUrl"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
     NKAssetDownload *asset = [issue addAssetWithRequest:request];
@@ -143,7 +121,55 @@
 }
 
 - (void) openIssue:(NKIssue *)issue  {
-    // Display the current issue in the main PDF viewer.
+//    [[self.pageViewController.viewControllers objectAtIndex:0] loadPDFPageView:1 intoViewController:_pageViewController];
+    
+    //FCRDataViewController *startingViewController = [_modelController viewControllerAtIndex:0 storyboard: self.storyboard] ;
+    
+//    NSInteger index = [_modelController indexOfViewController:self.pageViewController];
+//    FCRDataViewController controller = [_modelController viewControllerAtIndex:index];
+    
+//    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
+//    NSArray *viewControllers = [NSArray arrayWithObject:startingViewController];
+//    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+//   
+//    self.pageViewController.dataSource = self.modelController;
+//    
+//    [self addChildViewController:self.pageViewController];
+//    [self.view addSubview:self.pageViewController.view];
+
+    [self.modelController setCurrentIssue:issue];
+    [self.modelController loadPDFPageView:1 intoViewController: self.pageViewController];
+    [self setupPageViewController:0];
+}
+
+- (void) setupPageViewController:(NSInteger)viewControllerIndex {
+	// Do any additional setup after loading the view, typically from a nib.
+    // Configure the page view controller and add it as a child view controller.
+    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    self.pageViewController.delegate = self;
+    
+    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:viewControllerIndex storyboard:self.storyboard];
+    NSArray *viewControllers = [NSArray arrayWithObject:startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+    
+    self.pageViewController.dataSource = self.modelController;
+    
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
+    
+    // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
+    CGRect pageViewRect = self.view.bounds;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {         
+        CGRect scoochedDownRectangle = CGRectMake(0, 21, pageViewRect.size.width, pageViewRect.size.height);
+        pageViewRect = CGRectInset(scoochedDownRectangle, 1, 20.0);
+    }
+    self.pageViewController.view.frame = pageViewRect;
+    
+    [self.pageViewController didMoveToParentViewController:self];    
+    
+    // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
+    //self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+    self.pageViewController.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
 }
 
 - (void)viewDidUnload
@@ -198,12 +224,12 @@
 
 #pragma mark - UIPageViewController delegate methods
 
-/*
+
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     
 }
- */
+
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
@@ -231,8 +257,6 @@
         viewControllers = [NSArray arrayWithObjects:previousViewController, currentViewController, nil];
     }
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
-
-
     return UIPageViewControllerSpineLocationMin;
 }
 
@@ -258,6 +282,7 @@
     NKIssue *issue = asset.issue;
     
     NSURL *issueContentPath = [issue.contentURL URLByAppendingPathComponent:@"IssueContent.pdf"];
+    
     [[NSFileManager defaultManager] copyItemAtURL:destinationURL toURL:issueContentPath error:nil];
     
     // We need some error handling here just in case we couldn't copy the issue content.
@@ -296,4 +321,6 @@
     NSLog(@"Writing progress of %f to the dictionary.", progress);
 
 }
+
+
 @end

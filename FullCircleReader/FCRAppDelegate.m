@@ -8,6 +8,11 @@
 
 #import "FCRAppDelegate.h"
 
+NSString * const FCM_APP_KEY = @"FCM12345";
+NSString * const PRESSROOM_URL = @"http://pressroom.servolabs.com";
+NSString * const DEV_DEVICE = @"dev";
+NSString * const PROD_DEVICE = @"prod";
+
 @implementation FCRAppDelegate
 
 @synthesize window = _window;
@@ -15,6 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge)];
     return YES;
 }
 
@@ -55,6 +62,41 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark Push Notification callback methods
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken  {
+    NSString *deviceTokenString = [[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""];
+    deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString: @">" withString: @""] ;
+    deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSLog(@"Push Notification Token: %@", deviceTokenString);
+    
+    // Send the token to the server
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", PRESSROOM_URL, @"subcriberDevice/registerDevice"]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest 
+									requestWithURL:url];
+    
+    NSString *params = [[NSString alloc] initWithFormat:@"pubAppKey=%@&token=%@&env=%@", FCM_APP_KEY, deviceTokenString, DEV_DEVICE];
+    request.HTTPMethod = @"POST";
+    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [NSURLConnection sendAsynchronousRequest:request 
+                                       queue:[[NSOperationQueue alloc] init] 
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (nil != error)  {
+            NSLog(@"Couldn't register device!  %@", [error localizedDescription]);
+        }
+    }];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection  {
+    NSLog(@"Finished communicating with the server");
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err  {
+    NSLog(@"Couldn't register for remote notifications: %@", [err localizedDescription]);
 }
 
 @end

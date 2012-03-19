@@ -47,6 +47,10 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>newsstand-content</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
@@ -67,10 +71,6 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>newsstand-content</string>
 	</array>
 </dict>
 </plist>

@@ -21,7 +21,6 @@
 - (void) setupPageViewController:(NSInteger)viewControllerIndex;
 - (void) initalizeIssueList;
 - (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
-
 @end
 
 @implementation FCRRootViewController;

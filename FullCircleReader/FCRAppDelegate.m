@@ -7,21 +7,35 @@
 //
 
 #import "FCRAppDelegate.h"
+#import <NewsstandKit/NewsstandKit.h>
+#import "IssueMetadataProcessor.h"
 
 NSString * const FCM_APP_KEY = @"FCM12345";
 NSString * const PRESSROOM_URL = @"http://pressroom.servolabs.com";
 NSString * const DEV_DEVICE = @"dev";
 NSString * const PROD_DEVICE = @"prod";
 
+@interface FCRAppDelegate()
+
+- (void) checkForIssueUpdates;
+- (void) retriveIssueList;
+-(NSDate*) getLastIssueDateOnServer;
+-(void) displayNetworkError:(NSError*) serviceError;
+
+@end
+
 @implementation FCRAppDelegate
 
 @synthesize window = _window;
+@synthesize updating = _updating;
+@synthesize updateStatusDelegate = updateStatusDelegate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge)];
+    [self checkForIssueUpdates];
     return YES;
 }
 
@@ -97,6 +111,102 @@ NSString * const PROD_DEVICE = @"prod";
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err  {
     NSLog(@"Couldn't register for remote notifications: %@", [err localizedDescription]);
+}
+
+- (void) checkForIssueUpdates  {
+
+    self.updating = YES;
+    [self.updateStatusDelegate startedUpdating];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 
+                                             (unsigned long)NULL), ^(void) {
+        
+        // Make a call to the Pressroom to find out what the last issue date is
+        NSDate *latestServerDate = [self getLastIssueDateOnServer];
+
+        if (nil != latestServerDate)  {
+            NKIssue *issueForLatestServerDate = [IssueMetadataProcessor findIssueWithDate:latestServerDate];
+            
+            // Does the server have a newer issue?
+            if (nil == issueForLatestServerDate)  {
+                [self retriveIssueList];
+            }
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            self.updating = NO;
+            [self.updateStatusDelegate finishedUpdating];
+        });
+        
+    });
+    
+        
+}
+
+- (void) retriveIssueList  {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/public/catalog?pubAppKey=%@", PRESSROOM_URL, FCM_APP_KEY]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest 
+									requestWithURL:url];
+    
+    NSError* serviceError;
+
+    NSData *serverResponse = [NSURLConnection sendSynchronousRequest:request 
+                                                   returningResponse:nil
+                                                               error:&serviceError];
+    
+    if (serviceError != nil)  {
+        [self displayNetworkError:serviceError];
+    } else  {
+    
+        NSDictionary *decodedResponse = [NSJSONSerialization JSONObjectWithData:serverResponse options:NSJSONReadingMutableContainers error:nil];
+            
+        NSArray *issueListData = [decodedResponse objectForKey:@"issues"];
+        for (NSMutableDictionary *issueData in issueListData)  {
+            // Convert the pubDate to an NSDate
+            NSString *pubDateStr = [issueData objectForKey:@"pubDate"];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"MM/dd/yyyy"];
+            [issueData setObject:[dateFormat dateFromString:pubDateStr] forKey:@"pubDate"];
+            
+            [IssueMetadataProcessor processIssueForDictionary:issueData];
+        }
+        
+    }
+}
+
+-(NSDate*) getLastIssueDateOnServer  {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/public/lastIssueDate?pubAppKey=%@", PRESSROOM_URL, FCM_APP_KEY]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest 
+									requestWithURL:url];
+    NSError *serviceError;
+    NSData *serverResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&serviceError];
+    
+    if (nil != serviceError)  {
+        if ([[[NKLibrary sharedLibrary] issues] count] == 0)  {
+            [self displayNetworkError:serviceError];
+        }
+        return nil;
+    } else  {
+        NSDictionary *decodedResponse = [NSJSONSerialization JSONObjectWithData:serverResponse options:NSJSONReadingMutableContainers error:nil];
+
+        NSString *serverDateStr = [decodedResponse objectForKey:@"lastIssueDate"];
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        return [dateFormat dateFromString:serverDateStr];
+    }
+}
+
+-(void) displayNetworkError:(NSError*) serviceError  {
+    NSString* message = [NSString stringWithFormat:@"Please check your Internet connection, then refresh your issue list. %@", [serviceError localizedDescription]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not get the issue list."
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

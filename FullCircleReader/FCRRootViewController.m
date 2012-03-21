@@ -13,6 +13,8 @@
 #import "FCRDataViewController.h"
 #import "SBJson.h"
 #import <UIKit/UIKit.h>
+#import "IssueMetadataProcessor.h"
+#import "FCRAppDelegate.h"
 
 @interface FCRRootViewController ()
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
@@ -59,10 +61,9 @@
     };
     
     popoverVisible = NO;
-    
-    if ([[[NKLibrary sharedLibrary ] issues] count] == 0)  {
-        [self initalizeIssueList];
-    }
+
+    FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
+    appDelegate.updateStatusDelegate = self;
 }
 
 - (void) initalizeIssueList  {
@@ -73,44 +74,39 @@
     NSArray *backIssues = [issueCatalogDict valueForKey:@"BackIssues"];
     NKLibrary *myLibrary = [NKLibrary sharedLibrary];
     NKIssue *latestIssue = nil;
-    NSDictionary *latestIssueMetaData = nil;
     for(NSDictionary *issueData in backIssues)  {
-        NSMutableDictionary *savedIssueData = [NSMutableDictionary dictionaryWithDictionary:issueData];
-        NSDate *pubDate = [savedIssueData valueForKey:@"PubDate"];
-        NKIssue *issue = [myLibrary addIssueWithName:[savedIssueData valueForKey:@"Name"] date:pubDate];
-        
-        NSURL *coverImageUrl = [NSURL URLWithString:[savedIssueData valueForKey:@"CoverImageUrl"]];
-        UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverImageUrl]];
-        
-        NSURL *savedCoverImagePath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
-        [UIImagePNGRepresentation(coverImage) writeToURL:savedCoverImagePath atomically:YES];
-        
-        [savedIssueData setValue:[NSNumber numberWithBool:NO] forKey:@"ContentWasDownloaded"];
-
-        NSURL *metaDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
-        [savedIssueData writeToURL:metaDataPath atomically:YES];
+        NKIssue *issue = [IssueMetadataProcessor processIssueForDictionary:issueData];
 
         if (latestIssue == nil)  {
             latestIssue = issue;
-            latestIssueMetaData = savedIssueData;
         } else if ([latestIssue.date laterDate:issue.date] == issue.date)  {
             latestIssue = issue;
-            latestIssueMetaData = savedIssueData;
         }
     }    
     [myLibrary setCurrentlyReadingIssue:latestIssue];    
-    [self startDownloadingIssue:latestIssue];
+    [self startDownloadingLatestIssue];
 
 }
 
-- (void) startDownloadingIssue:(NKIssue *)issue  {
-    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
-    NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
-    NSString *contentUrl = [issueData valueForKey:@"ContentUrl"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
-    NKAssetDownload *asset = [issue addAssetWithRequest:request];
-    [asset downloadWithDelegate:self]; 
+- (void) startDownloadingLatestIssue  {
+    [self startDownloadingIssue:[IssueMetadataProcessor getLastIssueFromDevice]];
+}
 
+- (void) startDownloadingIssue:(NKIssue *)issue  {
+    
+    if (nil != issue)  {
+        NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+        NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
+        
+        if (NO == [[issueData valueForKey:@"contentWasDownloaded"] boolValue])  {
+            NSString *contentUrl = [issueData valueForKey:@"contentUrl"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
+            NKAssetDownload *asset = [issue addAssetWithRequest:request];
+            NSLog(@"Downloaing issue %@ at %@", [issueData objectForKey:@"name"], contentUrl);
+            [asset downloadWithDelegate:self]; 
+        }
+    }
+    
 }
 
 - (void) openIssue:(NKIssue *)issue  {
@@ -283,7 +279,7 @@
     NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
     NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
     
-    [issueData setValue:[NSNumber numberWithBool:YES] forKey:@"ContentWasDownloaded"];
+    [issueData setValue:[NSNumber numberWithBool:YES] forKey:@"contentWasDownloaded"];
     
     [issueData writeToURL:issueDataPath atomically:YES];
 
@@ -308,10 +304,25 @@
     NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
     NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
     
-    [issueData setValue:[NSNumber numberWithFloat:progress] forKey:@"DownloadProgress"];
+    [issueData setValue:[NSNumber numberWithFloat:progress] forKey:@"downloadProgress"];
     
     [issueData writeToURL:issueDataPath atomically:YES];
     NSLog(@"Writing progress of %f to the dictionary.", progress);
+
+}
+
+-(void) startedUpdating  {
+    if (nil != self.issueListViewController)  {
+        [self.issueListViewController.spinner startAnimating];
+    }
+}
+
+-(void) finishedUpdating  {
+    if (nil != self.issueListViewController)  {
+        [self.issueListViewController.spinner stopAnimating];
+        [self.issueListViewController.tableView reloadData];
+    }
+    [self startDownloadingLatestIssue];
 
 }
 

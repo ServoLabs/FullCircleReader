@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FCRUpdateStatusDelegate.h"
 
 @interface FCRAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) BOOL updating;
+@property (weak, nonatomic) id<FCRUpdateStatusDelegate> updateStatusDelegate;
 
 @end

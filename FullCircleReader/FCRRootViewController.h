@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <NewsstandKit/NewsstandKit.h>
 #import "FCRIssueListViewController.h"
+#import "FCRUpdateStatusDelegate.h"
 
 @interface FCRRootViewController : UIViewController <UIPageViewControllerDelegate, UIPopoverControllerDelegate,
-                                                    NSURLConnectionDownloadDelegate>
+                                                    NSURLConnectionDownloadDelegate, FCRUpdateStatusDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *issueListButton;
@@ -20,6 +21,7 @@
 
 -(IBAction) issueListButtonPushed:(id) sender;
 - (void) startDownloadingIssue:(NKIssue *)issue;
+- (void) startDownloadingLatestIssue;
 - (void) openIssue:(NKIssue *)issue ;
 
 @end

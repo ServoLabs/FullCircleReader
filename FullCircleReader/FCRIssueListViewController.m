@@ -9,9 +9,12 @@
 #import "FCRIssueListViewController.h"
 #import <NewsstandKit/NewsstandKit.h>
 #import "IssueCellView.h"
+#import "IssueMetadataProcessor.h"
 
 @implementation FCRIssueListViewController
 
+@synthesize headerView = _headerView;
+@synthesize spinner = _spinner;
 @synthesize issues = _issues;
 @synthesize displayIssue = _displayIssue;
 @synthesize downloadIssue = _downloadIssue;
@@ -89,6 +92,22 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section  {
+    
+	if (0 == section)  {
+		return self.headerView;
+	} 
+
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (0 == section)  {
+        return self.headerView.frame.size.height;
+    }
+    return 0;
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  {
     return 80;
 }
@@ -122,19 +141,19 @@
     UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverArtPath]];
     
     cell.nameLabel.text = issue.name;
-    cell.subTitleLabel.text = [issueData valueForKey:@"SubTitle"];
+    cell.subTitleLabel.text = [issueData valueForKey:@"subTitle"];
     cell.coverImage.image = coverImage;
     cell.spinner.hidden = YES;
     cell.progressView.hidden = YES;
  
     // Set the publication date label
-    NSDate *today = [issueData valueForKey:@"PubDate"];
+    NSDate *today = [issueData valueForKey:@"pubDate"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MMMM, YYYY"];
     NSString *dateString = [dateFormat stringFromDate:today];
     cell.publicationDateLabel.text = dateString;
     
-    if ([[issueData valueForKey:@"ContentWasDownloaded"] boolValue])  {
+    if ([[issueData valueForKey:@"contentWasDownloaded"] boolValue])  {
         cell.downloadButton.hidden = YES;
         cell.subTitleLabel.hidden = NO;
     } else  {
@@ -144,9 +163,9 @@
             cell.subTitleLabel.hidden = YES;
             cell.downloadButton.hidden = YES;
             
-            float downloadProgress = [[issueData valueForKey:@"DownloadProgress"] floatValue];
+            float downloadProgress = [[issueData valueForKey:@"downloadProgress"] floatValue];
             NSLog(@"Issue: %@  -- Download Progress: %f", issue.name, downloadProgress);
-            cell.progressView.progress = [[issueData valueForKey:@"DownloadProgress"] floatValue];
+            cell.progressView.progress = downloadProgress;
         }
     }
     
@@ -201,7 +220,7 @@
     NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
     
     // If the issue has been downloaded, then open it up in the reader.
-    if ([[issueData valueForKey:@"ContentWasDownloaded"] boolValue])  {
+    if ([[issueData valueForKey:@"contentWasDownloaded"] boolValue])  {
        
         [self displayIssue](issue);        
 

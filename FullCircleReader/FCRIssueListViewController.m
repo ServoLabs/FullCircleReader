@@ -9,7 +9,7 @@
 #import "FCRIssueListViewController.h"
 #import <NewsstandKit/NewsstandKit.h>
 #import "IssueCellView.h"
-#import "IssueMetadataProcessor.h"
+#import "FCRIssueProcessor.h"
 
 @implementation FCRIssueListViewController
 

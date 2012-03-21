@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <NewsstandKit/NewsstandKit.h>
-#import "FCRUpdateStatusDelegate.h"
 
-@interface FCRIssueListViewController : UITableViewController<FCRUpdateStatusDelegate>
+@interface FCRIssueListViewController : UITableViewController
 
 @property(nonatomic, strong) IBOutlet UIView *headerView;
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;

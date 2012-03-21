@@ -20,8 +20,6 @@
 @property(nonatomic, strong) UIPopoverController *trayListPopover;
 
 -(IBAction) issueListButtonPushed:(id) sender;
-- (void) startDownloadingIssue:(NKIssue *)issue;
-- (void) startDownloadingLatestIssue;
 - (void) openIssue:(NKIssue *)issue ;
 
 @end

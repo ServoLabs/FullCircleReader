@@ -13,7 +13,7 @@
 #import "FCRDataViewController.h"
 #import "SBJson.h"
 #import <UIKit/UIKit.h>
-#import "IssueMetadataProcessor.h"
+#import "FCRIssueProcessor.h"
 #import "FCRAppDelegate.h"
 
 @interface FCRRootViewController ()
@@ -53,7 +53,7 @@
     
     __block __typeof__(self) blockSelf = self;
     self.issueListViewController.downloadIssue = ^(NKIssue* issue) {
-        [blockSelf startDownloadingIssue:issue];
+        [FCRIssueProcessor startDownloadingIssue:issue delegate:blockSelf];
     };
     
     self.issueListViewController.displayIssue = ^(NKIssue *issue) {
@@ -75,7 +75,7 @@
     NKLibrary *myLibrary = [NKLibrary sharedLibrary];
     NKIssue *latestIssue = nil;
     for(NSDictionary *issueData in backIssues)  {
-        NKIssue *issue = [IssueMetadataProcessor processIssueForDictionary:issueData];
+        NKIssue *issue = [FCRIssueProcessor processIssueForDictionary:issueData];
 
         if (latestIssue == nil)  {
             latestIssue = issue;
@@ -84,30 +84,10 @@
         }
     }    
     [myLibrary setCurrentlyReadingIssue:latestIssue];    
-    [self startDownloadingLatestIssue];
+    [FCRIssueProcessor startDownloadingLatestIssueWithDelegate:self];
 
 }
 
-- (void) startDownloadingLatestIssue  {
-    [self startDownloadingIssue:[IssueMetadataProcessor getLastIssueFromDevice]];
-}
-
-- (void) startDownloadingIssue:(NKIssue *)issue  {
-    
-    if (nil != issue)  {
-        NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
-        NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
-        
-        if (NO == [[issueData valueForKey:@"contentWasDownloaded"] boolValue])  {
-            NSString *contentUrl = [issueData valueForKey:@"contentUrl"];
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
-            NKAssetDownload *asset = [issue addAssetWithRequest:request];
-            NSLog(@"Downloaing issue %@ at %@", [issueData objectForKey:@"name"], contentUrl);
-            [asset downloadWithDelegate:self]; 
-        }
-    }
-    
-}
 
 - (void) openIssue:(NKIssue *)issue  {
 //    [[self.pageViewController.viewControllers objectAtIndex:0] loadPDFPageView:1 intoViewController:_pageViewController];
@@ -322,7 +302,7 @@
         [self.issueListViewController.spinner stopAnimating];
         [self.issueListViewController.tableView reloadData];
     }
-    [self startDownloadingLatestIssue];
+    [FCRIssueProcessor startDownloadingLatestIssueWithDelegate:self];
 
 }
 

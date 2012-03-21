@@ -40,7 +40,7 @@
 		0241CF3914E381620058E608 /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0241CF3714E3814C0058E608 /* NewsstandKit.framework */; };
 		02759C0614E71282007B0F4B /* IssueCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02759C0514E71282007B0F4B /* IssueCatalog.plist */; };
 		02759C0E14E76DDD007B0F4B /* IssueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02759C0D14E76DDD007B0F4B /* IssueCellView.m */; };
-		027D989115196AE600778F5D /* IssueMetadataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 027D989015196AE600778F5D /* IssueMetadataProcessor.m */; };
+		027D989115196AE600778F5D /* FCRIssueProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 027D989015196AE600778F5D /* FCRIssueProcessor.m */; };
 		0293086114CA796E00422C08 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293085E14CA796E00422C08 /* circle.png */; };
 		0293086214CA796E00422C08 /* fcnewlogo.png.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */; };
 		0293086314CA796E00422C08 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0293086014CA796E00422C08 /* Icon72.png */; };
@@ -120,8 +120,8 @@
 		02759C0C14E76DDC007B0F4B /* IssueCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueCellView.h; sourceTree = "<group>"; };
 		02759C0D14E76DDD007B0F4B /* IssueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueCellView.m; sourceTree = "<group>"; };
 		027D988E1519699E00778F5D /* FCRUpdateStatusDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCRUpdateStatusDelegate.h; sourceTree = "<group>"; };
-		027D988F15196AE600778F5D /* IssueMetadataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueMetadataProcessor.h; sourceTree = "<group>"; };
-		027D989015196AE600778F5D /* IssueMetadataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueMetadataProcessor.m; sourceTree = "<group>"; };
+		027D988F15196AE600778F5D /* FCRIssueProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCRIssueProcessor.h; sourceTree = "<group>"; };
+		027D989015196AE600778F5D /* FCRIssueProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCRIssueProcessor.m; sourceTree = "<group>"; };
 		0293085E14CA796E00422C08 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		0293085F14CA796E00422C08 /* fcnewlogo.png.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fcnewlogo.png.jpg; sourceTree = "<group>"; };
 		0293086014CA796E00422C08 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
@@ -215,8 +215,8 @@
 				02759C0D14E76DDD007B0F4B /* IssueCellView.m */,
 				029F051814E88A8300734849 /* IssueCellView.xib */,
 				027D988E1519699E00778F5D /* FCRUpdateStatusDelegate.h */,
-				027D988F15196AE600778F5D /* IssueMetadataProcessor.h */,
-				027D989015196AE600778F5D /* IssueMetadataProcessor.m */,
+				027D988F15196AE600778F5D /* FCRIssueProcessor.h */,
+				027D989015196AE600778F5D /* FCRIssueProcessor.m */,
 			);
 			path = FullCircleReader;
 			sourceTree = "<group>";
@@ -444,7 +444,7 @@
 				0241CF3114E37D9F0058E608 /* FCRIssueListViewController.m in Sources */,
 				02759C0E14E76DDD007B0F4B /* IssueCellView.m in Sources */,
 				3D99E66515031D2100CCB0D3 /* PDFPageView.m in Sources */,
-				027D989115196AE600778F5D /* IssueMetadataProcessor.m in Sources */,
+				027D989115196AE600778F5D /* FCRIssueProcessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

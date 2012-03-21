@@ -8,7 +8,7 @@
 
 #import "FCRAppDelegate.h"
 #import <NewsstandKit/NewsstandKit.h>
-#import "IssueMetadataProcessor.h"
+#import "FCRIssueProcessor.h"
 
 NSString * const FCM_APP_KEY = @"FCM12345";
 NSString * const PRESSROOM_URL = @"http://pressroom.servolabs.com";
@@ -17,7 +17,7 @@ NSString * const PROD_DEVICE = @"prod";
 
 @interface FCRAppDelegate()
 
-- (void) checkForIssueUpdates;
+- (void) checkForIssueUpdatesInBackground:(BOOL)isInBackground;
 - (void) retriveIssueList;
 -(NSDate*) getLastIssueDateOnServer;
 -(void) displayNetworkError:(NSError*) serviceError;
@@ -35,7 +35,14 @@ NSString * const PROD_DEVICE = @"prod";
     // Override point for customization after application launch.
     [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge)];
-    [self checkForIssueUpdates];
+    
+    NSDictionary *remoteNotif =
+        [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (nil != remoteNotif)  {
+        [self checkForIssueUpdatesInBackground:YES];
+    } else  {
+        [self checkForIssueUpdatesInBackground:NO];
+    }
     return YES;
 }
 
@@ -78,6 +85,7 @@ NSString * const PROD_DEVICE = @"prod";
      */
 }
 
+
 #pragma mark Push Notification callback methods
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken  {
@@ -113,7 +121,12 @@ NSString * const PROD_DEVICE = @"prod";
     NSLog(@"Couldn't register for remote notifications: %@", [err localizedDescription]);
 }
 
-- (void) checkForIssueUpdates  {
+- (void)application:(UIApplication*)app didReceiveRemoteNotification:(NSDictionary *)userInfo  {
+    
+}
+// application:didReceiveRemoteNotification:
+
+- (void) checkForIssueUpdatesInBackground:(BOOL)isInBackground  {
 
     self.updating = YES;
     [self.updateStatusDelegate startedUpdating];
@@ -125,12 +138,16 @@ NSString * const PROD_DEVICE = @"prod";
         NSDate *latestServerDate = [self getLastIssueDateOnServer];
 
         if (nil != latestServerDate)  {
-            NKIssue *issueForLatestServerDate = [IssueMetadataProcessor findIssueWithDate:latestServerDate];
+            NKIssue *issueForLatestServerDate = [FCRIssueProcessor findIssueWithDate:latestServerDate];
             
             // Does the server have a newer issue?
             if (nil == issueForLatestServerDate)  {
                 [self retriveIssueList];
             }
+        }
+        
+        if (isInBackground)  {
+            [FCRIssueProcessor startDownloadingLatestIssueWithDelegate:nil];
         }
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -169,9 +186,8 @@ NSString * const PROD_DEVICE = @"prod";
             [dateFormat setDateFormat:@"MM/dd/yyyy"];
             [issueData setObject:[dateFormat dateFromString:pubDateStr] forKey:@"pubDate"];
             
-            [IssueMetadataProcessor processIssueForDictionary:issueData];
+            [FCRIssueProcessor processIssueForDictionary:issueData];
         }
-        
     }
 }
 

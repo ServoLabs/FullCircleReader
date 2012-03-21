@@ -48,6 +48,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.issues = [[NKLibrary sharedLibrary] issues];
 }
 
 - (void)viewDidUnload
@@ -59,7 +60,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.issues = [[NKLibrary sharedLibrary] issues];
     [super viewWillAppear:animated];
 }
 

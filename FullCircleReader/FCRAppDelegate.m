@@ -20,6 +20,7 @@ NSString * const PROD_DEVICE = @"prod";
 - (void) checkForIssueUpdatesInBackground:(BOOL)isInBackground;
 - (void) retriveIssueList;
 -(NSDate*) getLastIssueDateOnServer;
+-(void) updateAppIcon;
 -(void) displayNetworkError:(NSError*) serviceError;
 
 @end
@@ -143,6 +144,7 @@ NSString * const PROD_DEVICE = @"prod";
             // Does the server have a newer issue?
             if (nil == issueForLatestServerDate)  {
                 [self retriveIssueList];
+                [self updateAppIcon];
             }
         }
         
@@ -187,8 +189,15 @@ NSString * const PROD_DEVICE = @"prod";
             [issueData setObject:[dateFormat dateFromString:pubDateStr] forKey:@"pubDate"];
             
             [FCRIssueProcessor processIssueForDictionary:issueData];
-        }
+        }        
     }
+}
+
+-(void) updateAppIcon  {
+    NKIssue *issue = [FCRIssueProcessor getLastIssueFromDevice];
+    NSURL *coverArtPath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
+    UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverArtPath]];
+    [[UIApplication sharedApplication] setNewsstandIconImage:coverImage];    
 }
 
 -(NSDate*) getLastIssueDateOnServer  {

@@ -11,7 +11,8 @@
 #import "FCRIssueProcessor.h"
 
 NSString * const FCM_APP_KEY = @"FCM";
-NSString * const PRESSROOM_URL = @"http://10.0.1.5:8080/Pressroom";
+//NSString * const PRESSROOM_URL = @"http://10.0.1.5:8080/Pressroom";
+NSString * const PRESSROOM_URL = @"http://pressroom.servolabs.com";
 NSString * const DEV_DEVICE = @"dev";
 NSString * const PROD_DEVICE = @"prod";
 

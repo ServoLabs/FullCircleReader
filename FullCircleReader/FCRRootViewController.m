@@ -16,6 +16,8 @@
 #import "FCRIssueProcessor.h"
 #import "FCRAppDelegate.h"
 
+#define BORDER_WIDTH 15
+
 @interface FCRRootViewController ()
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
 @property (nonatomic) BOOL popoverVisible;
@@ -131,7 +133,9 @@
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
     CGRect pageViewRect = self.view.bounds;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {         
-        CGRect scoochedDownRectangle = CGRectMake(0, 21, pageViewRect.size.width, pageViewRect.size.height);
+        CGRect scoochedDownRectangle = CGRectMake(BORDER_WIDTH, 21 + BORDER_WIDTH, 
+                                                  pageViewRect.size.width - (BORDER_WIDTH * 2), 
+                                                  pageViewRect.size.height - (BORDER_WIDTH * 2));
         pageViewRect = CGRectInset(scoochedDownRectangle, 1, 20.0);
     }
     self.pageViewController.view.frame = pageViewRect;

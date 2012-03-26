@@ -127,6 +127,7 @@
 		0293086014CA796E00422C08 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
 		0293086414CA7C1400422C08 /* NewsstandCoverArt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NewsstandCoverArt.jpg; sourceTree = "<group>"; };
 		029F051814E88A8300734849 /* IssueCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCellView.xib; sourceTree = "<group>"; };
+		02ABE7F8151C202B00660126 /* FullCircleReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FullCircleReader.entitlements; sourceTree = "<group>"; };
 		02F9279114F9765A006C3D9C /* Knob Download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Knob Download.png"; sourceTree = "<group>"; };
 		3D8CBA40150400E700BA998E /* issue58_en.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = issue58_en.pdf; sourceTree = "<group>"; };
 		3D99E66115031CBA00CCB0D3 /* PDFPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFPageView.xib; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 		0222905014C89818003643D5 /* FullCircleReader */ = {
 			isa = PBXGroup;
 			children = (
+				02ABE7F8151C202B00660126 /* FullCircleReader.entitlements */,
 				3D99E65F15031BDA00CCB0D3 /* PDFViewer */,
 				0241CF0814E37D6F0058E608 /* json-framework */,
 				0293085D14CA796E00422C08 /* Images */,
@@ -553,6 +555,7 @@
 		0222908314C89819003643D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FullCircleReader/FullCircleReader.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
 				INFOPLIST_FILE = "FullCircleReader/FullCircleReader-Info.plist";
@@ -565,6 +568,7 @@
 		0222908414C89819003643D5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FullCircleReader/FullCircleReader.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FullCircleReader/FullCircleReader-Prefix.pch";
 				INFOPLIST_FILE = "FullCircleReader/FullCircleReader-Info.plist";

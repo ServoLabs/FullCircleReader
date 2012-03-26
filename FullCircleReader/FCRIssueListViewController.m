@@ -15,7 +15,6 @@
 
 @synthesize headerView = _headerView;
 @synthesize spinner = _spinner;
-@synthesize issues = _issues;
 @synthesize displayIssue = _displayIssue;
 @synthesize downloadIssue = _downloadIssue;
 
@@ -48,7 +47,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.issues = [[NKLibrary sharedLibrary] issues];
 }
 
 - (void)viewDidUnload
@@ -114,7 +112,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.issues count];
+    return [[NKLibrary sharedLibrary ].issues count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,7 +132,7 @@
         }
     }
     
-    NKIssue *issue = [self.issues objectAtIndex:indexPath.row];
+    NKIssue *issue = [[NKLibrary sharedLibrary].issues objectAtIndex:indexPath.row];
     NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
     NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
     NSURL *coverArtPath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
@@ -215,7 +213,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NKIssue *issue = [self.issues objectAtIndex:indexPath.row];
+    NKIssue *issue = [[NKLibrary sharedLibrary].issues objectAtIndex:indexPath.row];
     NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
     NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
     

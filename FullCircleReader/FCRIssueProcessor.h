@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <NewsstandKit/NewsstandKit.h>
 
-@interface FCRIssueProcessor : NSObject
+@interface FCRIssueProcessor : NSObject<NSURLConnectionDownloadDelegate>
 
-+(NKIssue*) processIssueForDictionary:(NSDictionary*) metaData;
-+(NKIssue*) findIssueWithDate:(NSDate*) pubDate;
-+(NSDateComponents*) buildDateComponentsFromDate:(NSDate *) dateValue;
-+(NKIssue*) getLastIssueFromDevice;
-+(void) startDownloadingIssue:(NKIssue *) issue delegate:(id<NSURLConnectionDownloadDelegate>) delegate;
-+(void) startDownloadingLatestIssueWithDelegate:(id<NSURLConnectionDownloadDelegate>) connectionDelegate;
+@property(nonatomic, weak) id<NSURLConnectionDownloadDelegate> downloadDelegate;
+
+-(NKIssue*) processIssueForDictionary:(NSDictionary*) metaData;
+-(NKIssue*) findIssueWithDate:(NSDate*) pubDate;
+-(NSDateComponents*) buildDateComponentsFromDate:(NSDate *) dateValue;
+-(NKIssue*) getLastIssueFromDevice;
+-(void) startDownloadingIssue:(NKIssue *) issue;
+-(void) startDownloadingLatestIssue;
 
 @end

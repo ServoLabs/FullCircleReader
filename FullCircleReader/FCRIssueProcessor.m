@@ -10,7 +10,9 @@
 
 @implementation FCRIssueProcessor
 
-+(NKIssue*) processIssueForDictionary:(NSDictionary*) metaData  {
+@synthesize downloadDelegate;
+
+-(NKIssue*) processIssueForDictionary:(NSDictionary*) metaData  {
     
     NSMutableDictionary *savedIssueData = [NSMutableDictionary dictionaryWithDictionary:metaData];
     NSDate *pubDate = [savedIssueData valueForKey:@"pubDate"];
@@ -32,7 +34,7 @@
     return issue;
 }
 
-+(NKIssue*) getLastIssueFromDevice  {
+-(NKIssue*) getLastIssueFromDevice  {
     NKIssue *latestIssue = nil;
     NSArray *issues = [[NKLibrary sharedLibrary] issues];
     for (NKIssue *issue in issues)  {
@@ -47,7 +49,7 @@
     return latestIssue;
 }
     
-+(NKIssue*) findIssueWithDate:(NSDate*) pubDate  {
+-(NKIssue*) findIssueWithDate:(NSDate*) pubDate  {
     NSArray *issues = [[NKLibrary sharedLibrary] issues];
     
     // Only compare date, not time.
@@ -62,14 +64,14 @@
     return nil;
 }
 
-+(NSDateComponents*) buildDateComponentsFromDate:(NSDate *) dateValue  {
+-(NSDateComponents*) buildDateComponentsFromDate:(NSDate *) dateValue  {
     NSCalendar *cal = [NSCalendar currentCalendar];
     return [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) 
                                      fromDate:dateValue];
     
 }
 
-+(void) startDownloadingIssue:(NKIssue *) issue delegate:(id<NSURLConnectionDownloadDelegate>) delegate  {
+-(void) startDownloadingIssue:(NKIssue *) issue  {
     if (nil != issue)  {
         NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
         NSDictionary *issueData = [NSDictionary dictionaryWithContentsOfURL:issueDataPath];
@@ -79,14 +81,61 @@
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:contentUrl]];
             NKAssetDownload *asset = [issue addAssetWithRequest:request];
             NSLog(@"Downloaing issue %@ at %@", [issueData objectForKey:@"name"], contentUrl);
-            [asset downloadWithDelegate:delegate]; 
+            [asset downloadWithDelegate:(id<NSURLConnectionDownloadDelegate>)self]; 
         }
     }
 }
 
-+(void) startDownloadingLatestIssueWithDelegate:(id<NSURLConnectionDownloadDelegate>) connectionDelegate {
-    [self startDownloadingIssue:[FCRIssueProcessor getLastIssueFromDevice] delegate:connectionDelegate];
+-(void) startDownloadingLatestIssue {
+    [self startDownloadingIssue:[self getLastIssueFromDevice]];
 }
     
+#pragma mark - NSURLConnectionDownloadDelegate  
+
+-(void) connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL  {
+    NKAssetDownload *asset = connection.newsstandAssetDownload;
+    NKIssue *issue = asset.issue;
+    
+    NSURL *issueContentPath = [issue.contentURL URLByAppendingPathComponent:@"IssueContent.pdf"];
+    
+    [[NSFileManager defaultManager] copyItemAtURL:destinationURL toURL:issueContentPath error:nil];
+    
+    // We need some error handling here just in case we couldn't copy the issue content.
+    
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
+    
+    [issueData setValue:[NSNumber numberWithBool:YES] forKey:@"contentWasDownloaded"];
+    
+    [issueData writeToURL:issueDataPath atomically:YES];
+    
+    [self.downloadDelegate connectionDidFinishDownloading:connection destinationURL:destinationURL];
+}
+
+-(void) connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes  {
+    [self writeDownloadProgressToFile:connection withProgress:((float)totalBytesWritten / (float)expectedTotalBytes)];
+    [self.downloadDelegate connection:connection didWriteData:bytesWritten totalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];
+}
+
+-(void) connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes  {
+    
+    [self writeDownloadProgressToFile:connection withProgress:((float)totalBytesWritten / (float)expectedTotalBytes)];    
+    [self.downloadDelegate connectionDidResumeDownloading:connection totalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];
+}
+
+-(void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress  {
+    NKAssetDownload *asset = connection.newsstandAssetDownload;
+    NKIssue *issue = asset.issue;
+    
+    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
+    NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
+    
+    [issueData setValue:[NSNumber numberWithFloat:progress] forKey:@"downloadProgress"];
+    
+    [issueData writeToURL:issueDataPath atomically:YES];
+    NSLog(@"Writing progress of %f to the dictionary.", progress);
+    
+}
+
 
 @end

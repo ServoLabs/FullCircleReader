@@ -10,14 +10,14 @@
 #import <NewsstandKit/NewsstandKit.h>
 #import "FCRIssueProcessor.h"
 
-NSString * const FCM_APP_KEY = @"FCM12345";
-NSString * const PRESSROOM_URL = @"http://pressroom.servolabs.com";
+NSString * const FCM_APP_KEY = @"FCM";
+NSString * const PRESSROOM_URL = @"http://10.0.1.5:8080/Pressroom";
 NSString * const DEV_DEVICE = @"dev";
 NSString * const PROD_DEVICE = @"prod";
 
 @interface FCRAppDelegate()
 
-- (void) checkForIssueUpdatesInBackground:(BOOL)isInBackground;
+- (void) checkForIssueUpdatesInBackground;
 - (void) retriveIssueList;
 -(NSDate*) getLastIssueDateOnServer;
 -(void) updateAppIcon;
@@ -29,21 +29,26 @@ NSString * const PROD_DEVICE = @"prod";
 
 @synthesize window = _window;
 @synthesize updating = _updating;
-@synthesize updateStatusDelegate = updateStatusDelegate;
+@synthesize updateStatusDelegate = _updateStatusDelegate;
+@synthesize issueProcessor = _issueProcessor;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"Full Circle Reader app started.");
+    
+    self.issueProcessor = [[FCRIssueProcessor alloc] init];
+    
     // Override point for customization after application launch.
     [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge)];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability |
+                                                                            UIRemoteNotificationTypeBadge )];
+
+    // TODO: Need to re-attach to NewsstandKit downloads.
     
-    NSDictionary *remoteNotif =
-        [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (nil != remoteNotif)  {
-        [self checkForIssueUpdatesInBackground:YES];
-    } else  {
-        [self checkForIssueUpdatesInBackground:NO];
-    }
+    [self checkForIssueUpdatesInBackground];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     return YES;
 }
 
@@ -96,7 +101,7 @@ NSString * const PROD_DEVICE = @"prod";
     NSLog(@"Push Notification Token: %@", deviceTokenString);
     
     // Send the token to the server
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", PRESSROOM_URL, @"subcriberDevice/registerDevice"]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", PRESSROOM_URL, @"public/registerDevice"]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest 
 									requestWithURL:url];
@@ -123,11 +128,12 @@ NSString * const PROD_DEVICE = @"prod";
 }
 
 - (void)application:(UIApplication*)app didReceiveRemoteNotification:(NSDictionary *)userInfo  {
+    NSLog(@"I received a push notification while I was running");
+    [self checkForIssueUpdatesInBackground];
     
 }
-// application:didReceiveRemoteNotification:
 
-- (void) checkForIssueUpdatesInBackground:(BOOL)isInBackground  {
+- (void) checkForIssueUpdatesInBackground  {
 
     self.updating = YES;
     [self.updateStatusDelegate startedUpdating];
@@ -139,26 +145,23 @@ NSString * const PROD_DEVICE = @"prod";
         NSDate *latestServerDate = [self getLastIssueDateOnServer];
 
         if (nil != latestServerDate)  {
-            NKIssue *issueForLatestServerDate = [FCRIssueProcessor findIssueWithDate:latestServerDate];
+            NKIssue *issueForLatestServerDate = [self.issueProcessor findIssueWithDate:latestServerDate];
             
             // Does the server have a newer issue?
             if (nil == issueForLatestServerDate)  {
+                NSLog(@"Found a newer issue than the latest one we have.  Retrieving catalog.");
                 [self retriveIssueList];
                 [self updateAppIcon];
             }
         }
-        
-        if (isInBackground)  {
-            [FCRIssueProcessor startDownloadingLatestIssueWithDelegate:nil];
-        }
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [self.issueProcessor startDownloadingLatestIssue];
             self.updating = NO;
             [self.updateStatusDelegate finishedUpdating];
         });
         
     });
-    
         
 }
 
@@ -180,24 +183,32 @@ NSString * const PROD_DEVICE = @"prod";
     
         NSDictionary *decodedResponse = [NSJSONSerialization JSONObjectWithData:serverResponse options:NSJSONReadingMutableContainers error:nil];
             
-        NSArray *issueListData = [decodedResponse objectForKey:@"issues"];
-        for (NSMutableDictionary *issueData in issueListData)  {
-            // Convert the pubDate to an NSDate
-            NSString *pubDateStr = [issueData objectForKey:@"pubDate"];
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"MM/dd/yyyy"];
-            [issueData setObject:[dateFormat dateFromString:pubDateStr] forKey:@"pubDate"];
-            
-            [FCRIssueProcessor processIssueForDictionary:issueData];
-        }        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+
+            NSArray *issueListData = [decodedResponse objectForKey:@"issues"];
+            for (NSMutableDictionary *issueData in issueListData)  {
+                // Convert the pubDate to an NSDate
+                NSString *pubDateStr = [issueData objectForKey:@"pubDate"];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"MM/dd/yyyy"];
+                [issueData setObject:[dateFormat dateFromString:pubDateStr] forKey:@"pubDate"];
+                
+                [self.issueProcessor processIssueForDictionary:issueData];
+            }        
+        });
     }
 }
 
 -(void) updateAppIcon  {
-    NKIssue *issue = [FCRIssueProcessor getLastIssueFromDevice];
-    NSURL *coverArtPath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
-    UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverArtPath]];
-    [[UIApplication sharedApplication] setNewsstandIconImage:coverImage];    
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+
+        NKIssue *issue = [self.issueProcessor getLastIssueFromDevice];
+        
+        NSURL *coverArtPath = [issue.contentURL URLByAppendingPathComponent:@"CoverImage.png"];
+        UIImage *coverImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:coverArtPath]];
+
+        [[UIApplication sharedApplication] setNewsstandIconImage:coverImage];    
+    });
 }
 
 -(NSDate*) getLastIssueDateOnServer  {

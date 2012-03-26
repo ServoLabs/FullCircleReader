@@ -46,14 +46,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
+    appDelegate.issueProcessor.downloadDelegate = self;
+    
     [self setupPageViewController:0];
     
     self.issueListViewController = [[FCRIssueListViewController alloc] initWithNibName:@"FCRIssueListViewController" bundle:[NSBundle mainBundle]];
     
     __block __typeof__(self) blockSelf = self;
     self.issueListViewController.downloadIssue = ^(NKIssue* issue) {
-        [FCRIssueProcessor startDownloadingIssue:issue delegate:blockSelf];
+        [appDelegate.issueProcessor startDownloadingIssue:issue];
     };
     
     self.issueListViewController.displayIssue = ^(NKIssue *issue) {
@@ -61,13 +64,12 @@
     };
     
     popoverVisible = NO;
-
-    FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
     appDelegate.updateStatusDelegate = self;
 }
 
 - (void) initalizeIssueList  {
-    
+    FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
+
     NSString *path = [[NSBundle mainBundle] pathForResource:@"IssueCatalog" ofType:@"plist"];
     NSDictionary *issueCatalogDict = [[NSDictionary alloc] initWithContentsOfFile:path];
 
@@ -75,7 +77,7 @@
     NKLibrary *myLibrary = [NKLibrary sharedLibrary];
     NKIssue *latestIssue = nil;
     for(NSDictionary *issueData in backIssues)  {
-        NKIssue *issue = [FCRIssueProcessor processIssueForDictionary:issueData];
+        NKIssue *issue = [appDelegate.issueProcessor processIssueForDictionary:issueData];
 
         if (latestIssue == nil)  {
             latestIssue = issue;
@@ -84,7 +86,7 @@
         }
     }    
     [myLibrary setCurrentlyReadingIssue:latestIssue];    
-    [FCRIssueProcessor startDownloadingLatestIssueWithDelegate:self];
+    [appDelegate.issueProcessor startDownloadingLatestIssue];
 
 }
 
@@ -247,48 +249,16 @@
 #pragma mark - NSURLConnectionDownloadDelegate  
 
 -(void) connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL  {
-    NKAssetDownload *asset = connection.newsstandAssetDownload;
-    NKIssue *issue = asset.issue;
-    
-    NSURL *issueContentPath = [issue.contentURL URLByAppendingPathComponent:@"IssueContent.pdf"];
-    
-    [[NSFileManager defaultManager] copyItemAtURL:destinationURL toURL:issueContentPath error:nil];
-    
-    // We need some error handling here just in case we couldn't copy the issue content.
-    
-    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
-    NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
-    
-    [issueData setValue:[NSNumber numberWithBool:YES] forKey:@"contentWasDownloaded"];
-    
-    [issueData writeToURL:issueDataPath atomically:YES];
-
     [self.issueListViewController.tableView reloadData];
 }
 
 -(void) connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes  {
-    [self writeDownloadProgressToFile:connection withProgress:((float)totalBytesWritten / (float)expectedTotalBytes)];
     [self.issueListViewController.tableView reloadData];
 }
 
 -(void) connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes  {
 
-    [self writeDownloadProgressToFile:connection withProgress:((float)totalBytesWritten / (float)expectedTotalBytes)];
     [self.issueListViewController.tableView reloadData];    
-}
-
--(void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress  {
-    NKAssetDownload *asset = connection.newsstandAssetDownload;
-    NKIssue *issue = asset.issue;
-    
-    NSURL *issueDataPath = [issue.contentURL URLByAppendingPathComponent:@"issueData.plist"];
-    NSMutableDictionary *issueData = [NSMutableDictionary dictionaryWithContentsOfURL:issueDataPath];
-    
-    [issueData setValue:[NSNumber numberWithFloat:progress] forKey:@"downloadProgress"];
-    
-    [issueData writeToURL:issueDataPath atomically:YES];
-    NSLog(@"Writing progress of %f to the dictionary.", progress);
-
 }
 
 -(void) startedUpdating  {
@@ -302,8 +272,6 @@
         [self.issueListViewController.spinner stopAnimating];
         [self.issueListViewController.tableView reloadData];
     }
-    [FCRIssueProcessor startDownloadingLatestIssueWithDelegate:self];
-
 }
 
 

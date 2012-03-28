@@ -1,5 +1,75 @@
 {"issues":[
 	{
+	 "pubDate":"01/26/2011",
+	 "name":"Special Edition #01",
+	 "subTitle":"The Perfect Server",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/issueSE01_en-cover.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issueSE01_en.pdf"
+	},
+	{
+	 "pubDate":"2/25/2011",
+	 "name":"Issue 46",
+	 "subTitle":"New Series - LibreOffice",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/46/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue46_en.pdf"
+	},
+	{
+	 "pubDate":"03/05/2011",
+	 "name":"Python Special Edition Vol 1",
+	 "subTitle":"Program In Python Volume #01",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/PY01/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issuePY01_en.pdf"
+	},
+	{
+	 "pubDate":"3/25/2011",
+	 "name":"Issue 47",
+	 "subTitle":"EBook Software on Linux",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/47/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue47_en.pdf"
+	},
+	{
+	 "pubDate":"4/22/2011",
+	 "name":"Issue 48",
+	 "subTitle":"Remastersys Your Machine",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/48/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue48_en.pdf"
+	},
+	{
+	 "pubDate":"05/04/2011",
+	 "name":"Python Special Edition Vol 2",
+	 "subTitle":"Program In Python Volume #02",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/PY02/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issuePY02_en.pdf"
+	},
+	{
+	 "pubDate":"5/27/2011",
+	 "name":"Issue 49",
+	 "subTitle":"The Readers Have Spoken",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/49/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue49_en.pdf"
+	},
+	{
+	 "pubDate":"6/24/2011",
+	 "name":"Issue 50",
+	 "subTitle":"How To: Use KDE 4.6",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/50/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue50_en.pdf"
+	},
+	{
+	 "pubDate":"7/29/2011",
+	 "name":"Issue 51",
+	 "subTitle":"How To: Use KDE 4.6 - Part 2",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/51/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue51_en.pdf"
+	},
+	{
+	 "pubDate":"8/26/2011",
+	 "name":"Issue 52",
+	 "subTitle":"ZoneMinder CCTV - Part 1",
+	 "coverArtUrl":"http://dl.fullcirclemagazine.org/cover/52/en.jpg",
+	 "contentUrl":"http://dl.fullcirclemagazine.org/issue52_en.pdf"
+	},
+	{
 	 "pubDate":"10/28/2011",
 	 "name":"Issue 54",
 	 "subTitle":"Closing Windows",

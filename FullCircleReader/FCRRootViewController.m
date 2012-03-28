@@ -67,6 +67,7 @@
     
     popoverVisible = NO;
     appDelegate.updateStatusDelegate = self;
+    
 }
 
 - (void) initalizeIssueList  {
@@ -110,6 +111,8 @@
 //    [self addChildViewController:self.pageViewController];
 //    [self.view addSubview:self.pageViewController.view];
 
+    [[NKLibrary sharedLibrary] setCurrentlyReadingIssue:issue];
+    
     [self.modelController setCurrentIssue:issue];
     [self.modelController loadPDFPageView:1 intoViewController: self.pageViewController];
     [self setupPageViewController:0];
@@ -162,6 +165,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if (nil != [NKLibrary sharedLibrary].currentlyReadingIssue)  {
+        [self openIssue:[NKLibrary sharedLibrary].currentlyReadingIssue];
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

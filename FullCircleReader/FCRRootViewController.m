@@ -11,7 +11,6 @@
 #import "FCRModelController.h"
 
 #import "FCRDataViewController.h"
-#import "SBJson.h"
 #import <UIKit/UIKit.h>
 #import "FCRIssueProcessor.h"
 #import "FCRAppDelegate.h"
@@ -24,7 +23,6 @@
 
 - (void) setupPageViewController:(NSInteger)viewControllerIndex;
 - (void) initalizeIssueList;
-- (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
 @end
 
 @implementation FCRRootViewController;
@@ -168,7 +166,6 @@
     if (nil != [NKLibrary sharedLibrary].currentlyReadingIssue)  {
         [self openIssue:[NKLibrary sharedLibrary].currentlyReadingIssue];
     }
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated

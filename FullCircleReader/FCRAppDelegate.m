@@ -41,10 +41,9 @@ NSString * const PROD_DEVICE = @"prod";
     self.issueProcessor = [[FCRIssueProcessor alloc] init];
     
     // Override point for customization after application launch.
-    [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability |
-                                                                            UIRemoteNotificationTypeBadge )];
+//    [[NSUserDefaults standardUserDefaults]setBool: YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeBadge )];
 
     // TODO: Need to re-attach to NewsstandKit downloads.
     
@@ -167,7 +166,7 @@ NSString * const PROD_DEVICE = @"prod";
 }
 
 - (void) retriveIssueList  {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/public/catalog?pubAppKey=%@", PRESSROOM_URL, FCM_APP_KEY]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/fcm/catalog.json", PRESSROOM_URL, FCM_APP_KEY]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest 
 									requestWithURL:url];
@@ -213,7 +212,7 @@ NSString * const PROD_DEVICE = @"prod";
 }
 
 -(NSDate*) getLastIssueDateOnServer  {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/public/lastIssueDate?pubAppKey=%@", PRESSROOM_URL, FCM_APP_KEY]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/fcm/lastIssueDate.json", PRESSROOM_URL, FCM_APP_KEY]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest 
 									requestWithURL:url];

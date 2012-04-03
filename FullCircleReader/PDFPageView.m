@@ -46,26 +46,24 @@
 	CGRect pageRect = CGPDFPageGetBoxRect(self.page, kCGPDFBleedBox);
 	CGFloat pageWidth = pageRect.size.width;
 	CGFloat pageHeight = pageRect.size.height;
-	CGFloat scaleRatio = 1;
+	CGFloat scaleRatioX = 1;
+    CGFloat scaleRatioY = 1;
     
-	if (pageWidth < pageHeight) {
-		scaleRatio = frameHeight / pageHeight;
-	} else {
-		scaleRatio = frameWidth / pageWidth;
-	}
+    scaleRatioY = frameHeight / pageHeight;
+    scaleRatioX = frameWidth / pageWidth;
     
 	CGFloat xOffset = (frameWidth - pageWidth
-                       * scaleRatio) / 2;
+                       * scaleRatioX) / 2;
 	CGFloat yOffset = (frameHeight - pageHeight
-                       * scaleRatio) / 2;
+                       * scaleRatioY) / 2;
     
 	CGAffineTransform pdfTransform =
     CGPDFPageGetDrawingTransform(
                                  self.page, kCGPDFMediaBox,
-                                 CGRectMake(xOffset, yOffset, pageWidth,
-                                            pageHeight), 0, true);
+                                 CGRectMake(xOffset, yOffset, pageWidth, pageHeight), 
+                                 0, true);
 	CGContextConcatCTM(context, CGAffineTransformScale(
-                                                       pdfTransform, scaleRatio, scaleRatio));
+                                                       pdfTransform, (frameWidth / pageWidth), (frameHeight / pageHeight)) );
 	CGContextDrawPDFPage(context, self.page);
     
 	CGContextRestoreGState(context);

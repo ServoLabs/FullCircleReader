@@ -22,9 +22,10 @@
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
 @property (nonatomic) BOOL popoverVisible;
 
-- (void) setupPageViewController:(NSInteger)viewControllerIndex;
+- (void) setupPageViewController;
 - (void) initalizeIssueList;
 - (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
+- (void) initializeModelController:(NKIssue *) issue;
 @end
 
 @implementation FCRRootViewController;
@@ -48,11 +49,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+        
+    [self setupPageViewController];
     
     FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
     appDelegate.issueProcessor.downloadDelegate = self;
-    
-    [self setupPageViewController:0];
     
     self.issueListViewController = [[FCRIssueListViewController alloc] initWithNibName:@"FCRIssueListViewController" bundle:[NSBundle mainBundle]];
     
@@ -94,34 +96,17 @@
 
 
 - (void) openIssue:(NKIssue *)issue  {
-//    [[self.pageViewController.viewControllers objectAtIndex:0] loadPDFPageView:1 intoViewController:_pageViewController];
-    
-    //FCRDataViewController *startingViewController = [_modelController viewControllerAtIndex:0 storyboard: self.storyboard] ;
-    
-//    NSInteger index = [_modelController indexOfViewController:self.pageViewController];
-//    FCRDataViewController controller = [_modelController viewControllerAtIndex:index];
-    
-//    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
-//    NSArray *viewControllers = [NSArray arrayWithObject:startingViewController];
-//    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
-//   
-//    self.pageViewController.dataSource = self.modelController;
-//    
-//    [self addChildViewController:self.pageViewController];
-//    [self.view addSubview:self.pageViewController.view];
-
-    [self.modelController setCurrentIssue:issue];
-    [self.modelController loadPDFPageView:1 intoViewController: self.pageViewController];
-    [self setupPageViewController:0];
+    [self initializeModelController:issue];
+    [self setupPageViewController];
 }
 
-- (void) setupPageViewController:(NSInteger)viewControllerIndex {
+- (void) setupPageViewController{
 	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller.
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.delegate = self;
     
-    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:viewControllerIndex storyboard:self.storyboard];
+    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
     NSArray *viewControllers = [NSArray arrayWithObject:startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     
@@ -143,8 +128,9 @@
     [self.pageViewController didMoveToParentViewController:self];    
     
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
+    
     //self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-    self.pageViewController.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+     self.pageViewController.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
 }
 
 - (void)viewDidUnload
@@ -195,6 +181,13 @@
         _modelController = [[FCRModelController alloc] init];
     }
     return _modelController;
+}
+
+- (void)initializeModelController:(NKIssue *) issue
+{
+    _modelController = nil;   
+    _modelController = [[FCRModelController alloc] initWithNKIssue:issue];
+    
 }
 
 #pragma mark - UIPageViewController delegate methods

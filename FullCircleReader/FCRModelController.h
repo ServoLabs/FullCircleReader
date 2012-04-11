@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <NewsstandKit/NewsstandKit.h>
+#import "PDFPageView.h"
+
 @class FCRDataViewController;
 
 @interface FCRModelController : NSObject <UIPageViewControllerDataSource>
 - (FCRDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(FCRDataViewController *)viewController;
-- (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController;
+- (id)initWithNKIssue:(NKIssue *) issue;
+
+@property(nonatomic) CGPDFDocumentRef pdfDocument;
+@property(nonatomic, strong) PDFPageView *pageView;
 @property(nonatomic, strong) NKIssue *currentIssue;
 @end

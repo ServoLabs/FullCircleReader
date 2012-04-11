@@ -42,7 +42,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "126"
          endingLineNumber = "126"
-         landmarkName = "-pageViewController:viewControllerBeforeViewController:"
+         landmarkName = "-getIssueContentPath"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -56,7 +56,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "119"
          endingLineNumber = "119"
-         landmarkName = "-indexOfViewController:"
+         landmarkName = "-initializePDFPageNumbers"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -70,7 +70,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "136"
          endingLineNumber = "136"
-         landmarkName = "-pageViewController:viewControllerAfterViewController:"
+         landmarkName = "-initializePageData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -154,7 +154,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "55"
          endingLineNumber = "55"
-         landmarkName = "-viewControllerAtIndex:storyboard:"
+         landmarkName = "-initWithNKIssue:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -168,7 +168,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "50"
          endingLineNumber = "50"
-         landmarkName = "-viewControllerAtIndex:storyboard:"
+         landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -196,7 +196,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "210"
          endingLineNumber = "210"
-         landmarkName = "-modelController"
+         landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -209,9 +209,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "308"
-         endingLineNumber = "308"
-         landmarkName = "-writeDownloadProgressToFile:withProgress:"
-         landmarkType = "5">
+         endingLineNumber = "308">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -223,9 +221,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "307"
-         endingLineNumber = "307"
-         landmarkName = "-writeDownloadProgressToFile:withProgress:"
-         landmarkType = "5">
+         endingLineNumber = "307">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -238,7 +234,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "256"
          endingLineNumber = "256"
-         landmarkName = "-issueListButtonPushed:"
+         landmarkName = "-connectionDidResumeDownloading:totalBytesWritten:expectedTotalBytes:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -251,9 +247,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "277"
-         endingLineNumber = "277"
-         landmarkName = "-connectionDidFinishDownloading:destinationURL:"
-         landmarkType = "5">
+         endingLineNumber = "277">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -265,9 +259,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "283"
-         endingLineNumber = "283"
-         landmarkName = "-connectionDidFinishDownloading:destinationURL:"
-         landmarkType = "5">
+         endingLineNumber = "283">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -308,8 +300,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "38"
          endingLineNumber = "38"
-         landmarkName = "-init"
-         landmarkType = "5">
+         landmarkName = "@implementation FCRModelController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -322,7 +314,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "121"
          endingLineNumber = "121"
-         landmarkName = "-openIssue:"
+         landmarkName = "-setupPageViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -336,7 +328,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "105"
          endingLineNumber = "105"
-         landmarkName = "-initializePageData"
+         landmarkName = "-loadPDFPageView:intoViewController:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -350,7 +342,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "241"
          endingLineNumber = "241"
-         landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
+         landmarkName = "-issueListButtonPushed:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -364,7 +356,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "69"
          endingLineNumber = "69"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         landmarkName = "-initWithNKIssue:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -378,7 +370,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "68"
          endingLineNumber = "68"
-         landmarkName = "-initalizeIssueList"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -392,7 +384,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "141"
          endingLineNumber = "141"
-         landmarkName = "-setupPageViewController:"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -406,7 +398,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "78"
          endingLineNumber = "78"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         landmarkName = "-setupPDFDocument"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -420,7 +412,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "77"
          endingLineNumber = "77"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         landmarkName = "-setupPDFDocument"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -434,7 +426,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "134"
          endingLineNumber = "134"
-         landmarkName = "-openIssue:"
+         landmarkName = "-setupPageViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -448,7 +440,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "70"
          endingLineNumber = "70"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         landmarkName = "-initWithNKIssue:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -462,7 +454,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "66"
          endingLineNumber = "66"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         landmarkName = "-initWithNKIssue:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -476,7 +468,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "83"
          endingLineNumber = "83"
-         landmarkName = "-initializePDFPageNumbers"
+         landmarkName = "-viewControllerAtIndex:storyboard:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -490,8 +482,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "135"
          endingLineNumber = "135"
-         landmarkName = "-openIssue:"
-         landmarkType = "5">
+         landmarkName = "@implementation FCRRootViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -504,8 +496,21 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "88"
          endingLineNumber = "88"
-         landmarkName = "-initializePDFPageNumbers"
+         landmarkName = "-viewControllerAtIndex:storyboard:"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355861171.178178"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "@implementation FCRRootViewController"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

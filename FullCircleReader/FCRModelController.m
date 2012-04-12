@@ -5,7 +5,7 @@
 //  Created by Bryce Penberthy on 1/19/12.
 //  Copyright (c) 2012 Servo Labs, LLC. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 #import "FCRModelController.h"
 
 #import "FCRDataViewController.h"
@@ -23,37 +23,65 @@
 @property (strong, nonatomic) NSMutableArray *pageData;
 - (NSURL*) getIssueContentPath;
 - (void) initializePDFPageNumbers;
-- (NSInteger) getNumberOfPages;
 - (void) initializePageData;
+- (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController;
 @end
 
 @implementation FCRModelController
 
 @synthesize pageData = _pageData;
 @synthesize currentIssue = _currentIssue;
+@synthesize pageView = _pageView;
+@synthesize pdfDocument = _pdfDocument;
+
 NSString * const IssueContentPDF = @"IssueContent.pdf";
 NSString * const PageNumberFormat = @"Page - %d";
+NSInteger numberOfPages;
+
+CGPDFPageRef page;
 - (id)init
 {
     self = [super init];
     if (self) {
         // Create the data model.
         [self initializePageData];
-       
+    }
+    return self;
+}
+- (id)initWithNKIssue:(NKIssue *) issue
+{
+    NSLog(@"InitModelController");
+    self = [super init];
+    if (self) {
+        self.currentIssue = issue;    
+        [self initializePageData]; 
+        if(self.pdfDocument != nil){
+            CGPDFDocumentRelease(self.pdfDocument);
+        }
+        [self setupPDFDocument];   
+        numberOfPages = CGPDFDocumentGetNumberOfPages(self.pdfDocument);
+        [self initializePDFPageNumbers];
+           
     }
     return self;
 }
 
+-(void) setupPDFDocument{
+    NSURL *issueContentPath = [self getIssueContentPath];
+    NSData *data =[[NSData alloc] initWithContentsOfURL:issueContentPath];
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge_retained CFDataRef)data);
+    self.pdfDocument = CGPDFDocumentCreateWithProvider(dataProvider);
+}
+
 - (FCRDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {   
-    // Return the data view controller for the given index.
     if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
         return nil;
     }
     
     // Create a new view controller and pass suitable data.
-    FCRDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"FCRDataViewController"];
-    dataViewController.dataObject = [self.pageData objectAtIndex:index];
+    FCRDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"FCRDataViewController"];    
+    dataViewController.dataObject = [self.pageData objectAtIndex:index];    
     [self loadPDFPageView:index intoViewController:dataViewController];
     return dataViewController;
 }
@@ -63,36 +91,26 @@ NSString * const PageNumberFormat = @"Page - %d";
 
 - (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController
 {
-    [self initializePDFPageNumbers];
-    NSInteger physicalPageNumber = index + 1;
-    NSURL *issueContentPath = [self getIssueContentPath];
-    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)issueContentPath);
-    CGPDFPageRef page = CGPDFDocumentGetPage(pdfDocument, physicalPageNumber);
+    //NSLog(@"loadPDFPageView");
+    NSInteger physicalPageNumber = index + 1;     
+    page = CGPDFDocumentGetPage(self.pdfDocument, physicalPageNumber);
     CGPDFPageRetain(page);    
-    PDFPageView *pageView = [[PDFPageView alloc] init];
-    pageView.page = page;
-    pageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;    
-    pageView.backgroundColor = [UIColor whiteColor];
-    dataViewController.view = pageView;
-    //[dataViewController.view addSubview: pageView];
-    //pageView.frame = CGRectMake(0, 100, 320, 160);
+    self.pageView = [[PDFPageView alloc] init];
+    self.pageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;    
+    self.pageView.backgroundColor = [UIColor whiteColor];
+    self.pageView.page = page;
+    dataViewController.view = self.pageView;
+    CGPDFPageRelease(page);
     
 }
 
 - (void) initializePDFPageNumbers{
-    NSInteger numberOfPages = [self getNumberOfPages];
+    //NSLog(@"initializePDFPageNumbers");
     NSMutableArray* pageData = [NSMutableArray arrayWithCapacity: numberOfPages];    
     for (NSInteger pageIndex = 1; pageIndex <= numberOfPages; pageIndex++) {
         [pageData addObject: [NSString stringWithFormat:PageNumberFormat, pageIndex]];
     }
     self.pageData= pageData;
-}
-
-- (NSInteger) getNumberOfPages{
-    NSURL *issueContentPath = [self getIssueContentPath];
-    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)issueContentPath);
-    NSInteger numberOfPages = CGPDFDocumentGetNumberOfPages(pdfDocument);
-    return numberOfPages;
 }
 
 - (NSURL*) getIssueContentPath {

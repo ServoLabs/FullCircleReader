@@ -10,6 +10,7 @@
 #import <NewsstandKit/NewsstandKit.h>
 #import "PDFPageView.h"
 
+extern NSString * const IssueContentPDF;
 @class FCRDataViewController;
 
 @interface FCRModelController : NSObject <UIPageViewControllerDataSource>

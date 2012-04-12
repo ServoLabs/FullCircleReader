@@ -9,7 +9,6 @@
 #import "FCRRootViewController.h"
 #import "PDFPageView.h"
 #import "FCRModelController.h"
-
 #import "FCRDataViewController.h"
 #import "SBJson.h"
 #import <UIKit/UIKit.h>
@@ -24,7 +23,6 @@
 
 - (void) setupPageViewController;
 - (void) initalizeIssueList;
-- (void) writeDownloadProgressToFile:(NSURLConnection *)connection withProgress:(float)progress;
 - (void) initializeModelController:(NKIssue *) issue;
 @end
 
@@ -36,7 +34,6 @@
 @synthesize issueListViewController = _issueListViewController;
 @synthesize trayListPopover = _trayListPopover;
 @synthesize popoverVisible;
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -65,6 +62,10 @@
     
     self.issueListViewController.displayIssue = ^(NKIssue *issue) {
         [blockSelf openIssue:issue];
+    };
+    
+    self.issueListViewController.deleteIssue = ^(NKIssue* issue){
+        [blockSelf deleteIssue: issue];
     };
     
     popoverVisible = NO;
@@ -98,6 +99,15 @@
 - (void) openIssue:(NKIssue *)issue  {
     [self initializeModelController:issue];
     [self setupPageViewController];
+}
+
+- (void) deleteIssue:(NKIssue *)issue  {
+    NSError *error;
+    NSURL *issueContentPath = [issue.contentURL  URLByAppendingPathComponent:IssueContentPDF];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager removeItemAtURL:issueContentPath error:&error] != YES){
+       // NSLog(@"Unable to delete file: %@", [fileManager contentsOfDirectoryAtPath:issueContentPath error:&error]);
+    }
 }
 
 - (void) setupPageViewController{

@@ -17,6 +17,7 @@
 @synthesize spinner = _spinner;
 @synthesize displayIssue = _displayIssue;
 @synthesize downloadIssue = _downloadIssue;
+@synthesize deleteIssue = _deleteIssue;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -120,9 +121,7 @@
     static NSString *CellIdentifier = @"IssueCell";
     
     IssueCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"IssueCellView"
                                                                  owner:self options:nil];
         for(id currentObject in topLevelObjects)  {
@@ -179,19 +178,25 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NKIssue *issue = [[NKLibrary sharedLibrary].issues objectAtIndex:indexPath.row];
+        [tableView beginUpdates];
+        //[self deleteIssue](issue);
+        
+        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+           
+        //[tableView endUpdates];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

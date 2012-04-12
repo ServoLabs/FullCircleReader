@@ -16,5 +16,5 @@
 
 @property (copy, nonatomic) void (^displayIssue) (NKIssue*) ;
 @property (copy, nonatomic) void (^downloadIssue) (NKIssue*) ;
-
+@property (copy, nonatomic) void (^deleteIssue) (NKIssue*) ;
 @end

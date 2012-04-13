@@ -37,40 +37,40 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352831584.918186"
+         timestampString = "355869193.129128"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
+         landmarkName = "-getIssueContentPath"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "-initializePDFPageNumbers"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "126"
          endingLineNumber = "126"
-         landmarkName = "-pageViewController:viewControllerBeforeViewController:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352831584.918186"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-indexOfViewController:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352831584.918186"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "-pageViewController:viewControllerAfterViewController:"
+         landmarkName = "-initializePageData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -93,13 +93,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRIssueListViewController.m"
-         timestampString = "352411717.582044"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
-         landmarkType = "5">
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "@implementation FCRIssueListViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -149,12 +149,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352802234.472088"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
-         landmarkName = "-viewControllerAtIndex:storyboard:"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "-initWithNKIssue:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -163,12 +163,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352802234.472088"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
-         landmarkName = "-viewControllerAtIndex:storyboard:"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
+         landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -177,12 +177,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRIssueListViewController.m"
-         timestampString = "352444458.186718"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         startingLineNumber = "211"
+         endingLineNumber = "211"
+         landmarkName = "@implementation FCRIssueListViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "220"
+         endingLineNumber = "220"
+         landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -191,12 +205,36 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "210"
-         endingLineNumber = "210"
-         landmarkName = "-modelController"
+         startingLineNumber = "318"
+         endingLineNumber = "318">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "317"
+         endingLineNumber = "317">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "266"
+         endingLineNumber = "266"
+         landmarkName = "-connectionDidResumeDownloading:totalBytesWritten:expectedTotalBytes:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -205,13 +243,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "308"
-         endingLineNumber = "308"
-         landmarkName = "-writeDownloadProgressToFile:withProgress:"
-         landmarkType = "5">
+         startingLineNumber = "287"
+         endingLineNumber = "287">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -219,13 +255,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "307"
-         endingLineNumber = "307"
-         landmarkName = "-writeDownloadProgressToFile:withProgress:"
-         landmarkType = "5">
+         startingLineNumber = "293"
+         endingLineNumber = "293">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -233,53 +267,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "256"
-         endingLineNumber = "256"
-         landmarkName = "-issueListButtonPushed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "277"
-         endingLineNumber = "277"
-         landmarkName = "-connectionDidFinishDownloading:destinationURL:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "283"
-         endingLineNumber = "283"
-         landmarkName = "-connectionDidFinishDownloading:destinationURL:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352784649.121683"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
          landmarkName = "-initalizeIssueList"
          landmarkType = "5">
       </FileBreakpoint>
@@ -308,8 +300,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "38"
          endingLineNumber = "38"
-         landmarkName = "-init"
-         landmarkType = "5">
+         landmarkName = "@implementation FCRModelController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -317,12 +309,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352784649.121683"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "-openIssue:"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-setupPageViewController"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -331,39 +323,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352831584.918186"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
-         landmarkName = "-initializePageData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352868080.078913"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "241"
-         endingLineNumber = "241"
-         landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352803993.859817"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
          landmarkName = "-loadPDFPageView:intoViewController:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -373,12 +337,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352784649.121683"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
-         landmarkName = "-initalizeIssueList"
+         startingLineNumber = "251"
+         endingLineNumber = "251"
+         landmarkName = "-issueListButtonPushed:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "-initWithNKIssue:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -387,12 +365,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352802234.472088"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "141"
-         endingLineNumber = "141"
-         landmarkName = "-setupPageViewController:"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -401,26 +393,82 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352831422.748381"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-setupPDFDocument"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352831626.779457"
+         timestampString = "355869193.129128"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
+         landmarkName = "-setupPDFDocument"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "144"
+         endingLineNumber = "144"
+         landmarkName = "-setupPageViewController"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
+         landmarkName = "-initWithNKIssue:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
+         landmarkName = "-initWithNKIssue:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "77"
          endingLineNumber = "77"
-         landmarkName = "-loadPDFPageView:intoViewController:"
+         landmarkName = "-viewControllerAtIndex:storyboard:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -429,82 +477,104 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352831666.821499"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
-         landmarkName = "-openIssue:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352835149.349895"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
-         landmarkName = "-loadPDFPageView:intoViewController:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352835187.771074"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "-loadPDFPageView:intoViewController:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352835224.945993"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
-         landmarkName = "-initializePDFPageNumbers"
-         landmarkType = "5">
+         startingLineNumber = "145"
+         endingLineNumber = "145"
+         landmarkName = "@implementation FCRRootViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "FullCircleReader/FCRRootViewController.m"
-         timestampString = "352835315.28961"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355869193.129128"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
-         landmarkName = "-openIssue:"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "-viewControllerAtIndex:storyboard:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "FullCircleReader/FCRModelController.m"
-         timestampString = "352835352.508209"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "88"
-         endingLineNumber = "88"
-         landmarkName = "-initializePDFPageNumbers"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "@implementation FCRRootViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FullCircleReader/FCRIssueListViewController.m"
+         timestampString = "355871298.343083"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "185"
+         endingLineNumber = "185"
+         landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "-deleteIssue:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FullCircleReader/FCRRootViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
+         landmarkName = "-deleteIssue:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FullCircleReader/FCRIssueListViewController.m"
+         timestampString = "355944483.008158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
+         landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "FullCircleReader/FCRModelController.m"
+         timestampString = "355943590.14454"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "137"
+         endingLineNumber = "137"
+         landmarkName = "-indexOfViewController:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

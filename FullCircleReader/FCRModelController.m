@@ -24,7 +24,6 @@
 - (NSURL*) getIssueContentPath;
 - (void) initializePDFPageNumbers;
 - (void) initializePageData;
-- (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController;
 @end
 
 @implementation FCRModelController

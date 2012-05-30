@@ -17,6 +17,7 @@ extern NSString * const IssueContentPDF;
 - (FCRDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(FCRDataViewController *)viewController;
 - (id)initWithNKIssue:(NKIssue *) issue;
+- (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController;
 
 @property(nonatomic) CGPDFDocumentRef pdfDocument;
 @property(nonatomic, strong) PDFPageView *pageView;

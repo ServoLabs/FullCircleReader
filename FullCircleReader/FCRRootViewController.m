@@ -97,27 +97,9 @@
 
 
 - (void) openIssue:(NKIssue *)issue  {
-//    [[self.pageViewController.viewControllers objectAtIndex:0] loadPDFPageView:1 intoViewController:_pageViewController];
-    
-    //FCRDataViewController *startingViewController = [_modelController viewControllerAtIndex:0 storyboard: self.storyboard] ;
-    
-//    NSInteger index = [_modelController indexOfViewController:self.pageViewController];
-//    FCRDataViewController controller = [_modelController viewControllerAtIndex:index];
-    
-//    FCRDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
-//    NSArray *viewControllers = [NSArray arrayWithObject:startingViewController];
-//    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
-//   
-//    self.pageViewController.dataSource = self.modelController;
-//    
-//    [self addChildViewController:self.pageViewController];
-//    [self.view addSubview:self.pageViewController.view];
-
     [[NKLibrary sharedLibrary] setCurrentlyReadingIssue:issue];
-    
-    [self.modelController setCurrentIssue:issue];
-    [self.modelController loadPDFPageView:1 intoViewController: self.pageViewController];
-    [self setupPageViewController:0];
+    [self initializeModelController:issue];
+    [self setupPageViewController];
 }
 
 - (void) deleteIssue:(NKIssue *)issue  {

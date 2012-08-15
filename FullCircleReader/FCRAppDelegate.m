@@ -245,4 +245,8 @@ NSString * const PROD_DEVICE = @"prod";
     [alert show];
 }
 
+-(void) applicationDidReceiveMemoryWarning:(UIApplication *)application  {
+    NSLog(@"We have a memory warning!!!");
+}
+
 @end

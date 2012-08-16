@@ -33,7 +33,9 @@
 @synthesize issueListViewController = _issueListViewController;
 @synthesize trayListPopover = _trayListPopover;
 @synthesize popoverVisible;
+@synthesize pdfDocument = _pdfDocument;
 
+NSString * const IssueContentPDF = @"IssueContent.pdf";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -98,8 +100,25 @@
 
 - (void) openIssue:(NKIssue *)issue  {
     [[NKLibrary sharedLibrary] setCurrentlyReadingIssue:issue];
-    [self initializeModelController:issue];
+    [self setupPDFDocument:issue];
+    [self initializeModelController:issue ];
     [self setupPageViewController];
+}
+
+-(void) setupPDFDocument :(NKIssue *)issue {
+    if(self.pdfDocument != nil){
+        CGPDFDocumentRelease(self.pdfDocument);
+        self.pdfDocument = nil;
+    }      
+    NSURL *issueContentPath = [self getIssueContentPath: issue];
+    NSData *data =[[NSData alloc] initWithContentsOfURL:issueContentPath];
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge_retained CFDataRef)data);
+    self.pdfDocument = CGPDFDocumentCreateWithProvider(dataProvider);
+}
+
+- (NSURL*) getIssueContentPath:(NKIssue *)issue {
+    NSURL *issueContentPath = [issue.contentURL URLByAppendingPathComponent:IssueContentPDF];
+    return issueContentPath;
 }
 
 - (void) deleteIssue:(NKIssue *)issue  {
@@ -124,6 +143,7 @@
     self.pageViewController.dataSource = self.modelController;
     
     [self addChildViewController:self.pageViewController];
+    
     [self.view addSubview:self.pageViewController.view];
     
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
@@ -200,7 +220,7 @@
 - (void)initializeModelController:(NKIssue *) issue
 {
     _modelController = nil;   
-    _modelController = [[FCRModelController alloc] initWithNKIssue:issue];
+    _modelController = [[FCRModelController alloc] initWithNKIssue:issue andPdfDocument: self.pdfDocument];
     
 }
 

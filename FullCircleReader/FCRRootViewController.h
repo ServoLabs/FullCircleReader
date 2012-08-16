@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *issueListButton;
 @property(nonatomic, strong) FCRIssueListViewController *issueListViewController;
 @property(nonatomic, strong) UIPopoverController *trayListPopover;
+@property(nonatomic) CGPDFDocumentRef pdfDocument;
 
 -(IBAction) issueListButtonPushed:(id) sender;
 -(void) openIssue:(NKIssue *)issue;

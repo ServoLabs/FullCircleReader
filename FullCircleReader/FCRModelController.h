@@ -16,10 +16,12 @@ extern NSString * const IssueContentPDF;
 @interface FCRModelController : NSObject <UIPageViewControllerDataSource>
 - (FCRDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(FCRDataViewController *)viewController;
-- (id)initWithNKIssue:(NKIssue *) issue;
+- (id)initWithNKIssue:(NKIssue *) issue andPdfDocument: (CGPDFDocumentRef *) pdfDocument;
 - (void) loadPDFPageView:(NSUInteger)index intoViewController:(FCRDataViewController *)dataViewController;
 
-@property(nonatomic) CGPDFDocumentRef pdfDocument;
+@property(nonatomic) CGPDFDocumentRef *pdfDocument;
 @property(nonatomic, strong) PDFPageView *pageView;
 @property(nonatomic, strong) NKIssue *currentIssue;
+
+
 @end

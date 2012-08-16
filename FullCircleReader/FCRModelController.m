@@ -33,7 +33,7 @@
 @synthesize pageView = _pageView;
 @synthesize pdfDocument = _pdfDocument;
 
-NSString * const IssueContentPDF = @"IssueContent.pdf";
+
 NSString * const PageNumberFormat = @"Page - %d";
 NSInteger numberOfPages;
 
@@ -47,30 +47,28 @@ CGPDFPageRef page;
     }
     return self;
 }
-- (id)initWithNKIssue:(NKIssue *) issue
+
+- (id)initWithNKIssue:(NKIssue *) issue andPdfDocument: (CGPDFDocumentRef *) rootViewPDFDocument
 {
     NSLog(@"InitModelController");
     self = [super init];
     if (self) {
-        self.currentIssue = issue;    
-        [self initializePageData]; 
-        if(self.pdfDocument != nil){
-            CGPDFDocumentRelease(self.pdfDocument);
-        }
-        [self setupPDFDocument];   
+        self.currentIssue = issue;   
+        self.pdfDocument = rootViewPDFDocument;
         numberOfPages = CGPDFDocumentGetNumberOfPages(self.pdfDocument);
         [self initializePDFPageNumbers];
+        [self initializePageData]; 
+ 
+    
            
     }
     return self;
 }
-
--(void) setupPDFDocument{
-    NSURL *issueContentPath = [self getIssueContentPath];
-    NSData *data =[[NSData alloc] initWithContentsOfURL:issueContentPath];
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge_retained CFDataRef)data);
-    self.pdfDocument = CGPDFDocumentCreateWithProvider(dataProvider);
+- (NSURL*) getIssueContentPath {
+    NSURL *issueContentPath = [self.currentIssue.contentURL URLByAppendingPathComponent:IssueContentPDF];
+    return issueContentPath;
 }
+
 
 - (FCRDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {   
@@ -112,10 +110,7 @@ CGPDFPageRef page;
     self.pageData= pageData;
 }
 
-- (NSURL*) getIssueContentPath {
-    NSURL *issueContentPath = [self.currentIssue.contentURL URLByAppendingPathComponent:IssueContentPDF];
-    return issueContentPath;
-}
+
 
 - (void) initializePageData {
     

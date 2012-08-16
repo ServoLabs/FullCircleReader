@@ -48,8 +48,9 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
 {
     [super viewDidLoad];
 
+    self.pageViewController.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
         
-    [self setupPageViewController];
+    //[self setupPageViewController];
     
     FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
     appDelegate.issueProcessor.downloadDelegate = self;
@@ -161,7 +162,6 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     
     //self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-     self.pageViewController.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
 }
 
 - (void)viewDidUnload

@@ -18,7 +18,6 @@
 
 @interface FCRRootViewController ()
 @property (readonly, strong, nonatomic) FCRModelController *modelController;
-@property (nonatomic) BOOL popoverVisible;
 
 - (void) setupPageViewController;
 - (void) initalizeIssueList;
@@ -32,7 +31,6 @@
 @synthesize issueListButton = _issueListButton;
 @synthesize issueListViewController = _issueListViewController;
 @synthesize trayListPopover = _trayListPopover;
-@synthesize popoverVisible;
 @synthesize pdfDocument = _pdfDocument;
 
 NSString * const IssueContentPDF = @"IssueContent.pdf";
@@ -50,7 +48,7 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
 
     self.pageViewController.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
         
-    //[self setupPageViewController];
+    [self setupPageViewController];
     
     FCRAppDelegate *appDelegate = (FCRAppDelegate*) [[UIApplication sharedApplication] delegate];
     appDelegate.issueProcessor.downloadDelegate = self;
@@ -70,7 +68,6 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
         [blockSelf deleteIssue: issue];
     };
     
-    popoverVisible = NO;
     appDelegate.updateStatusDelegate = self;
     
 }
@@ -142,11 +139,7 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     
     self.pageViewController.dataSource = self.modelController;
-    
-    [self addChildViewController:self.pageViewController];
-    
-    [self.view addSubview:self.pageViewController.view];
-    
+        
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
     CGRect pageViewRect = self.view.bounds;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {         
@@ -156,8 +149,9 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
         pageViewRect = CGRectInset(scoochedDownRectangle, 1, 20.0);
     }
     self.pageViewController.view.frame = pageViewRect;
-    
-    [self.pageViewController didMoveToParentViewController:self];    
+
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
     
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     
@@ -263,17 +257,17 @@ NSString * const IssueContentPDF = @"IssueContent.pdf";
 }
 
 -(IBAction) issueListButtonPushed:(id) sender  {
-    if (!popoverVisible)  {
+    if (self.trayListPopover == nil)  {
         self.trayListPopover = [[UIPopoverController alloc] initWithContentViewController:self.issueListViewController];
         self.trayListPopover.delegate = self;
-        
-        [self.trayListPopover presentPopoverFromBarButtonItem:self.issueListButton 
-                                     permittedArrowDirections:UIPopoverArrowDirectionAny 
+    }
+    
+    if  (!self.trayListPopover.isPopoverVisible) {
+        [self.trayListPopover presentPopoverFromBarButtonItem:self.issueListButton
+                                permittedArrowDirections:UIPopoverArrowDirectionAny
                                                      animated:YES];
-        self.popoverVisible = YES;
     } else  {
         [self.trayListPopover dismissPopoverAnimated:YES];
-        self.popoverVisible = NO;
     }
 }
 

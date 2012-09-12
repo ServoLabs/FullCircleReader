@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+    xmlns:news="http://itunes.apple.com/2011/Newsstand">
+    <updated>2012-09-11T07:00:00Z</updated>
+    <entry>
+        <id>100</id>
+        <updated>2011-01-26T07:00:00Z</updated>
+        <published>2011-01-26T07:00:00Z</published>
+        <summary>Special Edition #01 : The Perfect Server</summary>
+        <news:cover_art_icons>
+            <news:cover_art_icon size="SOURCE"
+            src="http://pressroom.servolabs.com/fcm/issue64-1024.png"/>
+        </news:cover_art_icons>
+        <content>http://dl.fullcirclemagazine.org/issueSE01_en.pdf</content>
+    </entry>
+    <entry>
+        <id>101</id>
+        <updated>2011-02-25T07:00:00Z</updated>
+        <published>2011-02-25T07:00:00Z</published>
+        <summary>Issue 46 : New Series - LibreOffice</summary>
+        <news:cover_art_icons>
+            <news:cover_art_icon_size="SOURCE"
+                src="http://dl.fullcirclemagazine.org/cover/46/en.jpg" />
+        </news:cover_art_icons>
+        <content>http://dl.fullcirclemagazine.org/issue46_en.pdf</content>
+    </entry>
+</feed>
